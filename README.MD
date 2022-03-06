@@ -5,6 +5,13 @@ Uses [react-redux](https://github.com/MusicCorner/react-redux) package
 
 ## Development:
 
+### Installation:
+
+We really recommend use *yarn* instead of *npm*
+
+**In terminal**:
+ - yarn: `yarn`
+ - npm: `npm install`
 ### Commands:
 
 `yarn start` - start development local front end app
