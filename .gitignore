@@ -2,5 +2,5 @@ node_modules/
 dist/
 *.log
 .vscode/
-dotenv/*.env
-!dotenv/example.env
+.env/*.env
+!.env/example.env

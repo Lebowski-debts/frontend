@@ -1,5 +1,5 @@
 {
-  "name": "react-redux",
+  "name": "Lebowski-money-frontend",
   "version": "1.0.0",
   "main": "src/App.ts",
   "typings": "declaration.d.ts",
@@ -9,6 +9,9 @@
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "@mui/material": "^5.4.4",
     "@reduxjs/toolkit": "^1.6.1",
     "@types/react": "^17.0.21",
     "@types/react-dom": "^17.0.9",
@@ -18,7 +21,7 @@
     "@typescript-eslint/parser": "^4.29.3",
     "babel-loader": "^8.2.2",
     "css-loader": "^6.3.0",
-    "dotenv": "^16.0.0",
+    "dotenv-webpack": "^7.1.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-typescript": "^14.0.0",
@@ -47,9 +50,10 @@
     "webpack-dev-server": "^4.2.1"
   },
   "scripts": {
-    "start": "webpack serve --env development --mode=development",
-    "build": "yarn clean && webpack --env production --mode=production",
+    "start": "NODE_ENV=development webpack serve --env development --mode=development",
+    "build": "NODE_ENV=production yarn clean && webpack --env production --mode=production",
     "lint": "eslint . --ext .ts,.tsx",
+    "lint-file": "eslint",
     "lint-fix": "yarn lint --fix",
     "check-types": "tsc --noEmit",
     "precommit": "yarn lint && yarn check-types",

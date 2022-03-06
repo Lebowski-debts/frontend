@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const resolvePath = p => path.resolve(__dirname, p)
 
@@ -8,16 +9,16 @@ module.exports = (env) => {
   const GLOBAL_SCSS = resolvePath('src/common/styles/index.scss');
 
   const isDevelopment = env.development
-  
+
   const sassLoader = {
     loader: 'sass-loader',
     options: {
       additionalData: `@import "${GLOBAL_SCSS}";`,
     },
   };
-  
+
   const styleLoader = isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader;
-  
+  console.log(`./dotenv/${process.env.NODE_ENV}.env`);
   return {
     entry: './src/index.tsx',
     devtool: 'inline-source-map',
@@ -98,7 +99,10 @@ module.exports = (env) => {
       new MiniCssExtractPlugin({
         filename: isDevelopment ? '[name].css' : '[name].[hash].css',
         chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
-      })
+      }),
+      new Dotenv({
+        path: resolvePath(`./dotenv/${process.env.NODE_ENV}.env`),
+      }),
     ]
   };
 };

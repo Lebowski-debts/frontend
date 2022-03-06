@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ApiUser } from '@common/types/apiTypes';
+import { ApiUser } from '@common/types/api';
 
 export const User: React.FC<ApiUser> = ({ id, name }) => (
   <div>
