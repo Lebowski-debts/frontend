@@ -1,7 +1,7 @@
 import { all } from '@redux-saga/core/effects';
 
-import { exampleSagas } from '@ducks/example/example.sagas';
+import { debtorsSagas } from '@ducks/debtors/debtors.sagas';
 
 export function* sagas() {
-  yield all([exampleSagas()]);
+  yield all([debtorsSagas()]);
 }

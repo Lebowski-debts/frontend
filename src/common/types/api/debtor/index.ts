@@ -1,3 +1,5 @@
+import { ApiListParams } from '..';
+
 export interface ApiGetDebtorUser {
   telegramUserId: number;
   id: number;
@@ -17,4 +19,13 @@ export interface ApiGetDebtor {
     initialSum: number;
     hasExpiredDebts: boolean;
   };
+}
+
+export type PaymentStatus = 'NEW' | 'PAID' | 'IN_PROGRESS';
+
+export type ExpirationStatus = 'NOT_EXPIRED' | 'EXPIRED';
+
+export interface ApiGetDebtorsParams extends ApiListParams {
+  paymentStatusList?: PaymentStatus;
+  expirationStatus?: ExpirationStatus;
 }

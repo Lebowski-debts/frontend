@@ -68,6 +68,7 @@ module.exports = (env) => {
       extensions: ['.tsx', '.ts', '.js'],
       modules: [path.resolve('./src'), 'node_modules'],
       alias: {
+        '@api': resolvePath('./src/api'),
         '@common': resolvePath('./src/common'),
         '@components': resolvePath('./src/components'),
         '@containers': resolvePath('./src/containers'),
@@ -90,6 +91,7 @@ module.exports = (env) => {
       },
       compress: true,
       port: 3000,
+      historyApiFallback: true,
     },
 
     plugins: [

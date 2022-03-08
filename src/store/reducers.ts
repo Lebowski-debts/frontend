@@ -1,5 +1,5 @@
-import { exampleSlice } from '../ducks/example/example.slice';
+import { debtorsReducer } from '@ducks/debtors/debtors.slice';
 
 export const reducers = {
-  example: exampleSlice.reducer,
+  debtors: debtorsReducer,
 };

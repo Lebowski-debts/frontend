@@ -9,11 +9,11 @@ import { HomeView } from '../views/Home';
 export const RootRouter = () => (
   <BrowserRouter>
     <Switch>
-      <Route path={ROOT_ROUTES.HOME}>
+      <Route path={ROOT_ROUTES.HOME} exact>
         <HomeView />
       </Route>
 
-      <Route path={ROOT_ROUTES.DEBTORS}>
+      <Route path={ROOT_ROUTES.DEBTORS} exact>
         <DebtorsView />
       </Route>
     </Switch>

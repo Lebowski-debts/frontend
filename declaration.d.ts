@@ -25,3 +25,21 @@ declare module '*.jpg' {
 declare module '*.jpeg' {
   export = imageUrl;
 }
+
+declare module '@mui/material/styles' {
+  interface Theme {
+    background: {
+      light: string;
+      main: string;
+      dark: string;
+    };
+  }
+  // allow configuration using `createTheme`
+  interface ThemeOptions {
+    background?: {
+      light?: string;
+      main?: string;
+      dark?: string;
+    };
+  }
+}

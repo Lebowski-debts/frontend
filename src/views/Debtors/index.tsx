@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { DebtorsList } from '@components/Debtors/DebtorsList';
+
 export const DebtorsView: React.FC = () => {
-  return <div>See debtors view</div>;
+  return <DebtorsList />;
 };
