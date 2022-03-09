@@ -31,22 +31,27 @@ function stringAvatar(name: string) {
     sx: {
       bgcolor: stringToColor(name),
     },
-    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    children: `${name[0] || 'a'}`.toLocaleUpperCase(),
   };
 }
 
 export const Avatar: React.FC<Props> = (props) => {
-  const { userName: _userName } = props;
+  const { userName: _userName, ...avatar } = props;
   const userName = `${_userName || ''}`;
 
   let finalProps = {
-    ...props,
+    ...avatar,
   };
 
   if (userName) {
+    const stringAvatarProps = stringAvatar(userName);
     finalProps = {
-      ...props,
-      ...stringAvatar(userName),
+      ...avatar,
+      sx: {
+        ...stringAvatarProps.sx,
+        ...avatar.sx,
+      },
+      children: avatar.children || stringAvatarProps.children,
     };
   }
   return <MaterialAvatar {...finalProps} />;

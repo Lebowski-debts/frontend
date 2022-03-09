@@ -12,6 +12,7 @@ import { store } from './store';
 sagaMiddleware.run(sagas);
 
 const theme = createTheme({
+  spacing: (value: number | string) => value,
   palette: {
     mode: 'dark',
     background: {

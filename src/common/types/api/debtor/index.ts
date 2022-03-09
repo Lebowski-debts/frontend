@@ -5,8 +5,8 @@ export interface ApiGetDebtorUser {
   id: number;
   telegramUserLogin?: string;
   nickname?: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ApiGetDebtor {

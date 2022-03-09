@@ -31,19 +31,28 @@ export const DebtorsList = () => {
     <Grid
       container
       justifyContent="center"
-      alignItems="center"
+      // alignItems="center"
       height="100%"
       width="100%"
       position="relative"
+      padding="12px 10px"
+      overflow="auto"
     >
       {isProcessing && <AbsoluteProgress />}
 
       {debtorsData?.data.length && !isProcessing ? (
-        debtorsData?.data.map((debtor) => (
-          <DebtorsListItem key={debtor.user.id} {...debtor} />
+        debtorsData?.data.map((debtor, index) => (
+          <Grid
+            item
+            key={debtor.user.id}
+            xs={12}
+            marginBottom={index === debtorsData.data.length - 1 ? 0 : 20}
+          >
+            <DebtorsListItem {...debtor} />
+          </Grid>
         ))
       ) : (
-        <Grid item>
+        <Grid item margin="auto">
           <Typography fontSize={24}>No debtors yet..</Typography>
         </Grid>
       )}
