@@ -14,13 +14,10 @@ export const DebtorsListItem: React.FC<ApiGetDebtor> = ({
 }) => {
   const theme = useTheme();
   return (
-    <Link
-      to={`${ROOT_ROUTES.DEBTORS}/${user.id}/debts`}
-      style={{ display: 'block' }}
-    >
-      <Card>
-        <CardContent>
-          <Grid container>
+    <Card>
+      <CardContent sx={{ padding: 18, ':last-child': { paddingBottom: 18 } }}>
+        <Grid container>
+          <Link to={`${ROOT_ROUTES.USERS}/${user.id}`}>
             <Grid item display="flex" xs={12} alignItems="center">
               <Avatar
                 userName={user.nickname || user.telegramUserLogin || ''}
@@ -30,54 +27,65 @@ export const DebtorsListItem: React.FC<ApiGetDebtor> = ({
                 {user.nickname || user.telegramUserLogin || ''}
               </Typography>
             </Grid>
+          </Link>
 
-            <Grid marginTop={18} paddingLeft={16}>
-              <Grid display="flex" item xs={12} marginBottom={3}>
-                <Typography fontSize={20} display="block">
-                  Сумма всех долгов:
-                </Typography>
-                <Typography fontSize={20} fontWeight={700}>
-                  <Space />
-                  {debtsInfo.initialSum}
+          <Grid marginTop={18} paddingLeft={16} width="100%">
+            <Grid display="flex" item xs={12} marginBottom={3}>
+              <Typography fontSize={20} display="block">
+                Сумма всех долгов:
+              </Typography>
+              <Typography fontSize={20} fontWeight={700}>
+                <Space />
+                {debtsInfo.initialSum}
+              </Typography>
+            </Grid>
+
+            <Grid display="flex" item xs={12} marginBottom={3}>
+              <Typography fontSize={20} display="block">
+                Сколько раз занимал:
+              </Typography>
+              <Typography fontSize={20} fontWeight={700}>
+                <Space />
+                {debtsInfo.count}
+              </Typography>
+            </Grid>
+
+            <Grid display="flex" item xs={12}>
+              <Typography fontSize={20} display="block">
+                Последний займ от:
+              </Typography>
+              <Typography fontSize={20} fontWeight={700}>
+                <Space />
+                {debtsInfo.lastDebtDate}
+              </Typography>
+            </Grid>
+
+            {debtsInfo.hasExpiredDebts && (
+              <Grid item xs={12} marginTop={12}>
+                <Typography
+                  sx={{ color: theme.palette.error.light }}
+                  fontSize={20}
+                  display="block"
+                  fontWeight="700"
+                >
+                  Есть просроченные долги!
                 </Typography>
               </Grid>
+            )}
 
-              <Grid display="flex" item xs={12} marginBottom={3}>
-                <Typography fontSize={20} display="block">
-                  Сколько раз занимал:
+            <Grid justifyContent="flex-end" display="flex" marginTop={24}>
+              <Link
+                to={`${ROOT_ROUTES.DEBTORS}/${user.id}/debts`}
+                // style={{ display: 'block', marginTop: 24, marginLeft: 'auto' }}
+              >
+                <Typography color="primary" fontSize={20} fontWeight={700}>
+                  Подробнее
                 </Typography>
-                <Typography fontSize={20} fontWeight={700}>
-                  <Space />
-                  {debtsInfo.count}
-                </Typography>
-              </Grid>
-
-              <Grid display="flex" item xs={12}>
-                <Typography fontSize={20} display="block">
-                  Последний займ от:
-                </Typography>
-                <Typography fontSize={20} fontWeight={700}>
-                  <Space />
-                  {debtsInfo.lastDebtDate}
-                </Typography>
-              </Grid>
-
-              {debtsInfo.hasExpiredDebts && (
-                <Grid item xs={12} marginTop={12}>
-                  <Typography
-                    sx={{ color: theme.palette.error.light }}
-                    fontSize={20}
-                    display="block"
-                    fontWeight="700"
-                  >
-                    Есть просроченные долги!
-                  </Typography>
-                </Grid>
-              )}
+              </Link>
             </Grid>
           </Grid>
-        </CardContent>
-      </Card>
-    </Link>
+        </Grid>
+      </CardContent>
+    </Card>
   );
 };

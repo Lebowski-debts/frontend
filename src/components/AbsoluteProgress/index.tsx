@@ -25,11 +25,14 @@ export const AbsoluteProgress: React.FC<Props> = ({
       alignContent="center"
       height="100%"
       width="100%"
-      sx={{ backdropFilter: 'blur(5px)' }}
       container
       {...containerGridProps}
+      sx={{ backdropFilter: 'blur(5px)', zIndex: 1, ...containerGridProps.sx }}
     >
-      <CircularProgress sx={{ color: theme.palette.primary.dark }} {...props} />
+      <CircularProgress
+        {...props}
+        sx={{ color: theme.palette.primary.dark, ...props.sx }}
+      />
     </Grid>
   );
 };

@@ -40,7 +40,7 @@ export const DebtorsList = () => {
     >
       {isProcessing && <AbsoluteProgress />}
 
-      {debtorsData?.data.length && !isProcessing ? (
+      {debtorsData?.data.length ? (
         debtorsData?.data.map((debtor, index) => (
           <Grid
             item
