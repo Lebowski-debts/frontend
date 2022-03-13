@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { Grid, Typography } from '@mui/material';
 
@@ -16,6 +17,7 @@ export const DebtorsList = () => {
   const isProcessing = useSelector(selectGetDebtorsIsProcessing);
   const debtorsData = useSelector(selectGetDebtorsData);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(
@@ -53,7 +55,7 @@ export const DebtorsList = () => {
         ))
       ) : (
         <Grid item margin="auto">
-          <Typography fontSize={24}>No debtors yet..</Typography>
+          <Typography fontSize={24}>{t('debtors.no_debtors_yet')}</Typography>
         </Grid>
       )}
     </Grid>

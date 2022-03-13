@@ -1,0 +1,12 @@
+{
+  "debtors": {
+    "no_debtors_yet": "Должников не найдено..",
+    "all_debts_sum": "Сумма всех долгов",
+    "debts_count": "Количество долгов",
+    "last_debt_from": "Последний долг",
+    "expired_debts_encountered": "У вас есть просроченные долги!"
+  },
+  "common": {
+    "details": "Подробнее"
+  }
+}

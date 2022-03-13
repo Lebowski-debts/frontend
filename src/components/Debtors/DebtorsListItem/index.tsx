@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { Card, CardContent, Grid, Typography, useTheme } from '@mui/material';
 
@@ -13,6 +14,8 @@ export const DebtorsListItem: React.FC<ApiGetDebtor> = ({
   debtsInfo,
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
+
   return (
     <Card>
       <CardContent sx={{ padding: 18, ':last-child': { paddingBottom: 18 } }}>
@@ -32,7 +35,7 @@ export const DebtorsListItem: React.FC<ApiGetDebtor> = ({
           <Grid marginTop={18} paddingLeft={16} width="100%">
             <Grid display="flex" item xs={12} marginBottom={3}>
               <Typography fontSize={20} display="block">
-                Сумма всех долгов:
+                {t('debtors.all_debts_sum')}
               </Typography>
               <Typography fontSize={20} fontWeight={700}>
                 <Space />
@@ -42,7 +45,7 @@ export const DebtorsListItem: React.FC<ApiGetDebtor> = ({
 
             <Grid display="flex" item xs={12} marginBottom={3}>
               <Typography fontSize={20} display="block">
-                Сколько раз занимал:
+                {t('debtors.debts_count')}
               </Typography>
               <Typography fontSize={20} fontWeight={700}>
                 <Space />
@@ -52,7 +55,7 @@ export const DebtorsListItem: React.FC<ApiGetDebtor> = ({
 
             <Grid display="flex" item xs={12}>
               <Typography fontSize={20} display="block">
-                Последний займ от:
+                {t('debtors.last_debt_from')}
               </Typography>
               <Typography fontSize={20} fontWeight={700}>
                 <Space />
@@ -68,7 +71,7 @@ export const DebtorsListItem: React.FC<ApiGetDebtor> = ({
                   display="block"
                   fontWeight="700"
                 >
-                  Есть просроченные долги!
+                  {t('debtors.expired_debts_encountered')}
                 </Typography>
               </Grid>
             )}
@@ -79,7 +82,7 @@ export const DebtorsListItem: React.FC<ApiGetDebtor> = ({
                 // style={{ display: 'block', marginTop: 24, marginLeft: 'auto' }}
               >
                 <Typography color="primary" fontSize={20} fontWeight={700}>
-                  Подробнее
+                  {t('common.details')}
                 </Typography>
               </Link>
             </Grid>

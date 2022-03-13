@@ -87,7 +87,7 @@ module.exports = (env) => {
 
     devServer: {
       static: {
-        directory: path.join(__dirname, 'public'),
+        directory: resolvePath('./src/public'),
       },
       compress: true,
       port: 3000,
@@ -96,7 +96,8 @@ module.exports = (env) => {
 
     plugins: [
       new HtmlWebpackPlugin({
-        template: "./src/index.html"
+        template: './src/index.html',
+        publicPath: '/'
       }),
       new MiniCssExtractPlugin({
         filename: isDevelopment ? '[name].css' : '[name].[hash].css',
