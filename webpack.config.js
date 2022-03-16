@@ -86,6 +86,7 @@ module.exports = (env) => {
     },
 
     devServer: {
+      host: '0.0.0.0',
       static: {
         directory: resolvePath('./src/public'),
       },

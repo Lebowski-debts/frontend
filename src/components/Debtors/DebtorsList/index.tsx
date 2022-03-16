@@ -37,7 +37,7 @@ export const DebtorsList = () => {
       height="100%"
       width="100%"
       position="relative"
-      padding="12px 10px"
+      padding="14px 14px"
       overflow="auto"
     >
       {isProcessing && <AbsoluteProgress />}

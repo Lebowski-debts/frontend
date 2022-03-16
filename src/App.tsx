@@ -18,11 +18,20 @@ const theme = createTheme({
   palette: {
     mode: 'dark',
     background: {
-      // light: '#38608C',
-      // main: '#1D3958',
-      // dark: '#0D1C2D',
-      default: '#1D3958',
-      paper: '#38608C',
+      default: '#0D1C2D',
+      paper: '#1D3958',
+    },
+
+    primary: {
+      light: '#38608C',
+      main: '#1D3958',
+      dark: '#0D1C2D',
+    },
+
+    secondary: {
+      light: '#E3F2FD',
+      main: '#90CAF9',
+      dark: '#42A5F5',
     },
   },
 });
