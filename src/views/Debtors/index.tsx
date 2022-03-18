@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { DebtorsList } from '@components/Debtors/DebtorsList';
+import { DebtorsListContainer } from '@containers/Debtors/DebtorsListContainer';
 
 export const DebtorsView: React.FC = () => {
-  return <DebtorsList />;
+  return <DebtorsListContainer />;
 };

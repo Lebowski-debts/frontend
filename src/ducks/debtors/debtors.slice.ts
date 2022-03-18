@@ -1,15 +1,19 @@
 import { combineReducers } from 'redux';
 
 import { createAsyncSlice } from '@common/store/helpers';
-import { PaginatedHttpSuccessResponse } from '@common/types/api';
-import { ApiGetDebtor } from '@common/types/api/debtor';
+import {
+  NormalizedList,
+  PaginatedHttpSuccessResponse,
+} from '@common/types/api';
+import { ApiGetDebtorDebtsCommonInfo } from '@common/types/api/debtor';
 
 import { GetDebtorsPayload } from './debtors.types';
 
 export const getDebtorsSlice = createAsyncSlice<
   GetDebtorsPayload,
-  PaginatedHttpSuccessResponse<ApiGetDebtor[]>,
-  unknown
+  PaginatedHttpSuccessResponse<
+    NormalizedList<ApiGetDebtorDebtsCommonInfo, number>
+  >
 >({ name: 'getDebtors' });
 
 export const debtorsReducer = combineReducers({

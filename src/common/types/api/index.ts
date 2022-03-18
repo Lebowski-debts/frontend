@@ -1,9 +1,12 @@
-export interface PaginatedHttpSuccessResponse<Data> {
-  data: Data;
+export interface ApiGetList {
   totalCount: number;
   pagesCount: number;
   currentPage: number;
   onPage: number;
+}
+
+export interface PaginatedHttpSuccessResponse<Data> extends ApiGetList {
+  data: Data;
 }
 
 export interface ApiListParams {
@@ -11,4 +14,11 @@ export interface ApiListParams {
   onPage?: number;
   orderField?: string;
   sortType?: string;
+}
+
+export type NormalizedListValues<T> = { [key: string | number]: T };
+
+export interface NormalizedList<E, K = string | number> {
+  entities: NormalizedListValues<E>;
+  keys: K[];
 }

@@ -20,7 +20,6 @@ export const AppRouter: React.FC<
     <Switch>
       <Route path={`${url}${ROOT_ROUTES.HOME}`} exact>
         <Redirect to={`${url}${ROOT_ROUTES.DEBTORS}`} />
-        {/* <HomeView /> */}
       </Route>
 
       <Route path={`${url}${ROOT_ROUTES.DEBTORS}`} exact>

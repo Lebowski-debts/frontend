@@ -1,32 +1,31 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import { Grid, Typography } from '@mui/material';
 
-import { getDebtorsSlice } from '@ducks/debtors/debtors.slice';
-import {
-  selectGetDebtorsData,
-  selectGetDebtorsIsProcessing,
-} from '@ducks/debtors/debtors.selectors';
 import { AbsoluteProgress } from '@components/AbsoluteProgress';
+import { GetDebtorsPayload } from '@ducks/debtors/debtors.types';
+import { DebtorsListItemContainer } from '@containers/Debtors/DebtorsListItemContainer';
 
-import { DebtorsListItem } from '../DebtorsListItem';
+export interface Props {
+  ids?: number[];
+  getData: (payload: GetDebtorsPayload) => void;
+  isProcessing: boolean;
+}
 
-export const DebtorsList = () => {
-  const isProcessing = useSelector(selectGetDebtorsIsProcessing);
-  const debtorsData = useSelector(selectGetDebtorsData);
-  const dispatch = useDispatch();
+export const DebtorsList: React.FC<Props> = ({
+  ids = [],
+  getData,
+  isProcessing,
+}) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    dispatch(
-      getDebtorsSlice.actions.request({
-        userId: +(process.env.TELEGRAM_USER_ID || 0),
-        page: 1,
-        onPage: 5,
-      })
-    );
+    getData({
+      userId: +(process.env.TELEGRAM_USER_ID || 0),
+      page: 1,
+      onPage: 5,
+    });
   }, []);
 
   return (
@@ -42,15 +41,15 @@ export const DebtorsList = () => {
     >
       {isProcessing && <AbsoluteProgress />}
 
-      {debtorsData?.data.length ? (
-        debtorsData?.data.map((debtor, index) => (
+      {ids.length ? (
+        ids.map((id, index) => (
           <Grid
             item
-            key={debtor.user.id}
+            key={id}
             xs={12}
-            marginBottom={index === debtorsData.data.length - 1 ? 0 : 20}
+            marginBottom={index === ids.length - 1 ? 0 : 20}
           >
-            <DebtorsListItem {...debtor} />
+            <DebtorsListItemContainer userId={id} />
           </Grid>
         ))
       ) : (

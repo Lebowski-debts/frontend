@@ -1,24 +1,17 @@
 import { ApiListParams } from '..';
+import { ApiGetUser } from '../user';
 
-export interface ApiGetDebtorUser {
-  telegramUserId: number;
-  id: number;
-  telegramUserLogin?: string;
-  nickname?: string;
-  createdAt: string;
-  updatedAt: string;
+export interface ApiGetDebtorDebtsCommonInfo {
+  count: number;
+  actualSum: number;
+  firstDebtDate: string;
+  lastDebtDate: string;
+  initialSum: number;
+  hasExpiredDebts: boolean;
 }
-
 export interface ApiGetDebtor {
-  user: ApiGetDebtorUser;
-  debtsInfo: {
-    count: number;
-    actualSum: number;
-    firstDebtDate: string;
-    lastDebtDate: string;
-    initialSum: number;
-    hasExpiredDebts: boolean;
-  };
+  user: ApiGetUser;
+  debtsInfo: ApiGetDebtorDebtsCommonInfo;
 }
 
 export type PaymentStatus = 'NEW' | 'PAID' | 'IN_PROGRESS';

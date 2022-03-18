@@ -31,7 +31,7 @@ export interface _CreateSliceOptions<State> {
 export const createAsyncSlice = <
   RequestPayload,
   SuccessPayload = undefined,
-  ErrorPayload = undefined
+  ErrorPayload = unknown
 >(
   options: _CreateSliceOptions<AsyncState<SuccessPayload, ErrorPayload>>
 ) => {
