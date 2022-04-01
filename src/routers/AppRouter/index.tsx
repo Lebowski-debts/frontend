@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { ROOT_ROUTES } from '@common/constants/routes';
 import { DebtorsView } from '@views/Debtors';
+import { LenderDebtorView } from '@views/LenderDebtor';
 
 export const AppRouter: React.FC<
   RouteComponentProps<any, StaticContext, unknown>
@@ -16,6 +17,7 @@ export const AppRouter: React.FC<
   useEffect(() => {
     i18n.changeLanguage(params.locale);
   }, [params.locale]);
+
   return (
     <Switch>
       <Route path={`${url}${ROOT_ROUTES.HOME}`} exact>
@@ -24,6 +26,13 @@ export const AppRouter: React.FC<
 
       <Route path={`${url}${ROOT_ROUTES.DEBTORS}`} exact>
         <DebtorsView />
+      </Route>
+
+      <Route
+        path={`${url}${ROOT_ROUTES.DEBTORS}/debtorId/:debtorId/lenderId/:lenderId${ROOT_ROUTES.DEBTS}`}
+        exact
+      >
+        <LenderDebtorView />
       </Route>
     </Switch>
   );

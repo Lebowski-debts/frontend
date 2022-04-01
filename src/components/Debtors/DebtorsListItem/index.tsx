@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -15,10 +14,17 @@ import { ApiGetDebtor } from '@common/types/api/debtor';
 import { ROOT_ROUTES } from '@common/constants/routes';
 import { Avatar } from '@components/Avatar';
 import { Space } from '@components/Space';
+import { LocalizedLink } from '@components/LocalizedLink';
 
-export const DebtorsListItem: React.FC<ApiGetDebtor> = ({
+export interface Props extends ApiGetDebtor {
+  lenderId: number;
+  debtorId: number;
+}
+
+export const DebtorsListItem: React.FC<Props> = ({
   user,
   debtsInfo,
+  lenderId,
 }) => {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -27,7 +33,7 @@ export const DebtorsListItem: React.FC<ApiGetDebtor> = ({
     <Card>
       <CardContent sx={{ padding: 18, ':last-child': { paddingBottom: 18 } }}>
         <Grid container>
-          <Link to={`${ROOT_ROUTES.USERS}/${user.id}`}>
+          <LocalizedLink to={`${ROOT_ROUTES.USERS}/${user.id}`}>
             <Grid item display="flex" xs={12} alignItems="center">
               <Avatar
                 userName={user.nickname || user.telegramUserLogin || ''}
@@ -37,7 +43,7 @@ export const DebtorsListItem: React.FC<ApiGetDebtor> = ({
                 {user.nickname || user.telegramUserLogin || ''}
               </Typography>
             </Grid>
-          </Link>
+          </LocalizedLink>
 
           <Grid marginTop={18} paddingLeft={16} width="100%">
             <Grid display="flex" item xs={12} marginBottom={3}>
@@ -89,14 +95,13 @@ export const DebtorsListItem: React.FC<ApiGetDebtor> = ({
               sx={{ background: theme.palette.primary.light, width: '100%' }}
               size="large"
             >
-              <Link
-                to={`${ROOT_ROUTES.DEBTORS}/${user.id}/debts`}
-                // style={{ display: 'block', marginTop: 24, marginLeft: 'auto' }}
+              <LocalizedLink
+                to={`${ROOT_ROUTES.DEBTORS}/debtorId/${user.id}/lenderId/${lenderId}/debts`}
               >
                 <Typography color="white" fontSize={16}>
                   {t('common.details')}
                 </Typography>
-              </Link>
+              </LocalizedLink>
             </Button>
           </Grid>
         </Grid>

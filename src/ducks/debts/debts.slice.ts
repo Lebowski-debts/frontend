@@ -1,18 +1,20 @@
-import { combineReducers } from 'redux';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { createAsyncSlice } from '@common/store/helpers';
-import { ApiGetDebtorDebts } from '@common/types/api/debt';
+import { NormalizedListValues } from '@common/types/api';
+import { ApiGetDebt } from '@common/types/api/debt';
 
-import { GetDebtorDebtsPayload } from './debts.types';
+const initialState: { entities: { [key: number]: ApiGetDebt } } = {
+  entities: {},
+};
 
-export const getDebtorDebtsSlice = createAsyncSlice<
-  GetDebtorDebtsPayload,
-  ApiGetDebtorDebts,
-  unknown
->({
-  name: 'getDebtorDebts',
+export const debtsSlice = createSlice({
+  name: 'fillDebts',
+  initialState,
+  reducers: {
+    fill: (state, action: PayloadAction<NormalizedListValues<ApiGetDebt>>) => {
+      state.entities = action.payload;
+    },
+  },
 });
 
-export const debtsReducer = combineReducers({
-  getDebtorDebts: getDebtorDebtsSlice.reducer,
-});
+export const debtsReducer = debtsSlice.reducer;

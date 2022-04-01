@@ -28,6 +28,13 @@ export interface _CreateSliceOptions<State> {
   name: string;
 }
 
+export const initialAsyncState = {
+  isProcessing: false,
+  isSuccess: false,
+  error: null,
+  value: null,
+};
+
 export const createAsyncSlice = <
   RequestPayload,
   SuccessPayload = undefined,
@@ -35,18 +42,11 @@ export const createAsyncSlice = <
 >(
   options: _CreateSliceOptions<AsyncState<SuccessPayload, ErrorPayload>>
 ) => {
-  const initialState: _AsyncState<SuccessPayload, ErrorPayload> = {
-    isProcessing: false,
-    isSuccess: false,
-    error: null,
-    value: null,
-  };
-
   return {
     ...createSlice({
       ...options,
       initialState: {
-        ...initialState,
+        ...initialAsyncState,
         ...options.initialState,
       },
       name: `async/${options.name}`,

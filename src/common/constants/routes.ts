@@ -3,5 +3,7 @@ export const ROOT_ROUTES = {
 
   DEBTORS: '/debtors',
 
+  DEBTS: '/debts',
+
   USERS: '/users',
 };
