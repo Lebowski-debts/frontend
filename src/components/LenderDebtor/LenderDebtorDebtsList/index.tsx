@@ -4,24 +4,26 @@ import { useTranslation } from 'react-i18next';
 import { Grid, Typography } from '@mui/material';
 
 import { AbsoluteProgress } from '@components/AbsoluteProgress';
-// import { DebtorDebtsListItemContainer } from '@containers/DebtorDebts/DebtorDebtsListItemContainer';
+import { AsyncState } from '@common/store/helpers';
+import { ApiListParams, PaginatedHttpSuccessResponse } from '@common/types/api';
+import { LenderDebtorDebtsListItemContainer } from '@containers/LenderDebtor/LenderDebtorDebtsListItemContainer';
 
-export interface Props {
-  isProcessing: boolean;
-  ids: number[];
-  getData: () => void;
+export interface Props
+  extends AsyncState<PaginatedHttpSuccessResponse<number[]>, unknown> {
+  getData: (params: ApiListParams) => void;
 }
 
-export const DebtorDebtsList: React.FC<Props> = ({
+export const LenderDebtorDebtsList: React.FC<Props> = ({
   getData,
-  ids,
   isProcessing,
+  value,
 }) => {
-  useEffect(() => {
-    getData();
-  }, []);
-
+  const { data = [] } = value || {};
   const { t } = useTranslation();
+
+  useEffect(() => {
+    getData({ page: 1 });
+  }, []);
 
   return (
     <Grid
@@ -35,15 +37,15 @@ export const DebtorDebtsList: React.FC<Props> = ({
     >
       {isProcessing && <AbsoluteProgress />}
 
-      {!ids.length ? (
-        ids.map((id, index) => (
+      {data.length ? (
+        data.map((id, index) => (
           <Grid
             item
             key={id}
             xs={12}
-            marginBottom={index === ids.length - 1 ? 0 : 20}
+            marginBottom={index === data.length - 1 ? 0 : 20}
           >
-            {/* <DebtorDebtsListItemContainer debtId={id} /> */}
+            <LenderDebtorDebtsListItemContainer debtId={id} />
           </Grid>
         ))
       ) : (

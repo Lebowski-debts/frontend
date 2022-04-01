@@ -1,6 +1,6 @@
 import { ApiGetDebtorsParams } from '@common/types/api/debtor';
 
-export interface GetDebtorDebtsPayload extends ApiGetDebtorsParams {
+export interface GetLenderDebtorDebtsPayload extends ApiGetDebtorsParams {
   debtorId: number;
   lenderId: number;
 }

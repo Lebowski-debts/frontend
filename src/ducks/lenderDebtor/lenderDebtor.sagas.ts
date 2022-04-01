@@ -5,9 +5,12 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { ApiGetDebt, ApiGetDebtorDebts } from '@common/types/api/debt';
 import { debtorsApi } from '@api/debtors';
 import { usersSlice } from '@ducks/users/users.slice';
+import { debtsSlice } from '@ducks/debts/debts.slice';
 
 import { getLenderDebtorDebtsSlice } from './lenderDebtor.slice';
-import { GetDebtorDebtsPayload } from './lenderDebtor.types';
+import { GetLenderDebtorDebtsPayload } from './lenderDebtor.types';
+
+// TODO: implement normalizr
 
 const fakeDebt: ApiGetDebt = {
   actualSum: 100,
@@ -21,7 +24,7 @@ const fakeDebt: ApiGetDebt = {
 };
 
 function* getLenderDebtorDebtsSaga(
-  action: PayloadAction<GetDebtorDebtsPayload>
+  action: PayloadAction<GetLenderDebtorDebtsPayload>
 ) {
   const { lenderId, debtorId, ...params } = action.payload;
 
@@ -49,6 +52,13 @@ function* getLenderDebtorDebtsSaga(
     );
 
     const debtIds = data.map((debt) => debt.id);
+
+    const debts = data.reduce(
+      (accum, value) => ({ ...accum, [value.id]: value }),
+      {}
+    );
+
+    yield put(debtsSlice.actions.fill(debts));
 
     yield put(
       usersSlice.actions.fill({

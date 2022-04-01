@@ -4,7 +4,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AsyncState } from '@common/store/helpers';
 import { PaginatedHttpSuccessResponse } from '@common/types/api';
 
-import { GetDebtorDebtsPayload } from './lenderDebtor.types';
+import { GetLenderDebtorDebtsPayload } from './lenderDebtor.types';
 
 export const getLenderDebtorMapKey = (lenderId: number, debtorId: number) =>
   `lender-${lenderId}_debtor-${debtorId}`;
@@ -15,7 +15,7 @@ export const getLenderDebtorDebtsSlice = createSlice({
     [key: string]: AsyncState<PaginatedHttpSuccessResponse<number[]>, unknown>;
   },
   reducers: {
-    request: (state, action: PayloadAction<GetDebtorDebtsPayload>) => {
+    request: (state, action: PayloadAction<GetLenderDebtorDebtsPayload>) => {
       const { debtorId, lenderId } = action.payload;
 
       state[getLenderDebtorMapKey(lenderId, debtorId)] = {
