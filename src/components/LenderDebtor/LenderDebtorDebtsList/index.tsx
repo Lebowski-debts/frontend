@@ -45,7 +45,11 @@ export const LenderDebtorDebtsList: React.FC<Props> = ({
             xs={12}
             marginBottom={index === data.length - 1 ? 0 : 20}
           >
-            <LenderDebtorDebtsListItemContainer debtId={id} />
+            <LenderDebtorDebtsListItemContainer
+              key={id}
+              index={index + 1}
+              debtId={id}
+            />
           </Grid>
         ))
       ) : (

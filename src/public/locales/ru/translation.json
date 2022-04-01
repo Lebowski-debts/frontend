@@ -6,6 +6,13 @@
     "last_debt_from": "Последний долг",
     "expired_debts_encountered": "У вас есть просроченные долги!"
   },
+  "debts": {
+    "debt_created_at": "Долг от",
+    "debt_sum": "Сколько занимал",
+    "debt_rest": "Сколько еще должен",
+    "debt_expires_at": "Когда должен вернуть",
+    "pay_the_debt_off": "Погасить долг"
+  },
   "common": {
     "details": "Подробнее"
   }

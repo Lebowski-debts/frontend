@@ -40,9 +40,9 @@ function* getLenderDebtorDebtsSaga(
 
     data.push(
       fakeDebt,
-      { ...fakeDebt, id: 2 },
-      { ...fakeDebt, id: 3 },
-      { ...fakeDebt, id: 4 },
+      { ...fakeDebt, id: 2, paymentStatus: 'NEW' },
+      { ...fakeDebt, id: 3, paymentStatus: 'PAID' },
+      { ...fakeDebt, id: 4, isExpired: true },
       { ...fakeDebt, id: 5 },
       { ...fakeDebt, id: 6 },
       { ...fakeDebt, id: 7 },

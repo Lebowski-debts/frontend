@@ -6,6 +6,13 @@
     "last_debt_from": "Last debt from",
     "expired_debts_encountered": "You have expired debts!"
   },
+  "debts": {
+    "debt_created_at": "Debt created at",
+    "debt_sum": "Debt sum",
+    "debt_rest": "To return",
+    "debt_expires_at": "Should return until",
+    "pay_the_debt_off": "Pay the debt off"
+  },
   "common": {
     "details": "Details"
   }
