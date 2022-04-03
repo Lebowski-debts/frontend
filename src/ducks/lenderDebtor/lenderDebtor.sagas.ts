@@ -2,7 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { ApiGetDebt, ApiGetDebtorDebts } from '@common/types/api/debt';
+import { ApiGetDebtorDebts } from '@common/types/api/debt';
 import { debtorsApi } from '@api/debtors';
 import { usersSlice } from '@ducks/users/users.slice';
 import { debtsSlice } from '@ducks/debts/debts.slice';
@@ -12,16 +12,16 @@ import { GetLenderDebtorDebtsPayload } from './lenderDebtor.types';
 
 // TODO: implement normalizr
 
-const fakeDebt: ApiGetDebt = {
-  actualSum: 100,
-  createdAt: '10.01.2022',
-  expireDate: '11.01.2022',
-  id: 1,
-  initialSum: 1000,
-  isExpired: false,
-  isPaid: false,
-  paymentStatus: 'IN_PROGRESS',
-};
+// const fakeDebt: ApiGetDebt = {
+//   actualSum: 100,
+//   createdAt: '10.01.2022',
+//   expireDate: '11.01.2022',
+//   id: 1,
+//   initialSum: 1000,
+//   isExpired: false,
+//   isPaid: false,
+//   paymentStatus: 'IN_PROGRESS',
+// };
 
 function* getLenderDebtorDebtsSaga(
   action: PayloadAction<GetLenderDebtorDebtsPayload>
@@ -38,18 +38,18 @@ function* getLenderDebtorDebtsSaga(
       params
     )) as AxiosResponse<ApiGetDebtorDebts>;
 
-    data.push(
-      fakeDebt,
-      { ...fakeDebt, id: 2, paymentStatus: 'NEW' },
-      { ...fakeDebt, id: 3, paymentStatus: 'PAID' },
-      { ...fakeDebt, id: 4, isExpired: true },
-      { ...fakeDebt, id: 5 },
-      { ...fakeDebt, id: 6 },
-      { ...fakeDebt, id: 7 },
-      { ...fakeDebt, id: 8 },
-      { ...fakeDebt, id: 9 },
-      { ...fakeDebt, id: 10 }
-    );
+    // data.push(
+    //   fakeDebt,
+    //   { ...fakeDebt, id: 2, paymentStatus: 'NEW' },
+    //   { ...fakeDebt, id: 3, paymentStatus: 'PAID' },
+    //   { ...fakeDebt, id: 4, isExpired: true },
+    //   { ...fakeDebt, id: 5 },
+    //   { ...fakeDebt, id: 6 },
+    //   { ...fakeDebt, id: 7 },
+    //   { ...fakeDebt, id: 8 },
+    //   { ...fakeDebt, id: 9 },
+    //   { ...fakeDebt, id: 10 }
+    // );
 
     const debtIds = data.map((debt) => debt.id);
 

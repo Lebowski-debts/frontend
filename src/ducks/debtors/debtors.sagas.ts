@@ -19,23 +19,23 @@ import { GetDebtorsPayload } from './debtors.types';
 import { getDebtorsSlice } from './debtors.slice';
 import { debtorsSchema } from './debtors.schemas';
 
-const fakeDebtor = {
-  debtsInfo: {
-    actualSum: 100,
-    count: 2,
-    firstDebtDate: '10.10.2019',
-    hasExpiredDebts: true,
-    initialSum: 10,
-    lastDebtDate: '10.10.2020',
-  },
-  user: {
-    createdAt: '',
-    id: 23,
-    telegramUserId: 12,
-    updatedAt: '15.10.10',
-    nickname: 'afarshartov',
-  },
-};
+// const fakeDebtor = {
+//   debtsInfo: {
+//     actualSum: 100,
+//     count: 2,
+//     firstDebtDate: '10.10.2019',
+//     hasExpiredDebts: true,
+//     initialSum: 10,
+//     lastDebtDate: '10.10.2020',
+//   },
+//   user: {
+//     createdAt: '',
+//     id: 23,
+//     telegramUserId: 12,
+//     updatedAt: '15.10.10',
+//     nickname: 'afarshartov',
+//   },
+// };
 
 /*
 {
@@ -60,15 +60,15 @@ function* getDebtorsSaga({ payload }: PayloadAction<GetDebtorsPayload>) {
         PaginatedHttpSuccessResponse<ApiGetDebtor[]>
       >;
 
-    data.push(
-      fakeDebtor,
-      { ...fakeDebtor, user: { ...fakeDebtor.user, id: 24 } },
-      { ...fakeDebtor, user: { ...fakeDebtor.user, id: 25 } },
-      { ...fakeDebtor, user: { ...fakeDebtor.user, id: 26 } },
-      { ...fakeDebtor, user: { ...fakeDebtor.user, id: 27 } },
-      { ...fakeDebtor, user: { ...fakeDebtor.user, id: 28 } },
-      { ...fakeDebtor, user: { ...fakeDebtor.user, id: 29 } }
-    );
+    // data.push(
+    //   fakeDebtor,
+    //   { ...fakeDebtor, user: { ...fakeDebtor.user, id: 24 } },
+    //   { ...fakeDebtor, user: { ...fakeDebtor.user, id: 25 } },
+    //   { ...fakeDebtor, user: { ...fakeDebtor.user, id: 26 } },
+    //   { ...fakeDebtor, user: { ...fakeDebtor.user, id: 27 } },
+    //   { ...fakeDebtor, user: { ...fakeDebtor.user, id: 28 } },
+    //   { ...fakeDebtor, user: { ...fakeDebtor.user, id: 29 } }
+    // );
 
     const normalizedDebtorsList = normalize<
       ApiGetDebtor,

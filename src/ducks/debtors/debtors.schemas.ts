@@ -11,7 +11,7 @@ export const debtsInfoSchema = new schema.Entity(
   {},
   {
     idAttribute: (value: ApiGetDebtorDebtsCommonInfo, parent: ApiGetDebtor) =>
-      parent.user.id as unknown as string,
+      (parent.user.id || parent.user.telegramUserId) as unknown as string,
   }
 );
 

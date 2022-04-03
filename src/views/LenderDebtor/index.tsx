@@ -20,7 +20,7 @@ export const LenderDebtorView: React.FC = () => {
   const debtorId = +_debtorId;
   const lenderId = +_lenderId;
 
-  const debtor = useAppSelector((state) => selectUser(state, 23));
+  const debtor = useAppSelector((state) => selectUser(state, debtorId));
 
   return (
     <AppLayout

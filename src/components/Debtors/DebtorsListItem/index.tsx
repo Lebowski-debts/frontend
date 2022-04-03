@@ -33,7 +33,9 @@ export const DebtorsListItem: React.FC<Props> = ({
     <Card>
       <CardContent sx={{ padding: 18, ':last-child': { paddingBottom: 18 } }}>
         <Grid container>
-          <LocalizedLink to={`${ROOT_ROUTES.USERS}/${user.id}`}>
+          <LocalizedLink
+            to={`${ROOT_ROUTES.USERS}/${user.id || user.telegramUserId || ''}`}
+          >
             <Grid item display="flex" xs={12} alignItems="center">
               <Avatar
                 userName={user.nickname || user.telegramUserLogin || ''}
@@ -91,18 +93,21 @@ export const DebtorsListItem: React.FC<Props> = ({
           </Grid>
 
           <Grid display="flex" marginTop={24} width="100%">
-            <Button
-              sx={{ background: theme.palette.primary.light, width: '100%' }}
-              size="large"
+            <LocalizedLink
+              to={`${ROOT_ROUTES.DEBTORS}/debtorId/${
+                user.id || user.telegramUserId || ''
+              }/lenderId/${lenderId}/debts`}
+              style={{ width: '100%' }}
             >
-              <LocalizedLink
-                to={`${ROOT_ROUTES.DEBTORS}/debtorId/${user.id}/lenderId/${lenderId}/debts`}
+              <Button
+                sx={{ background: theme.palette.primary.light, width: '100%' }}
+                size="large"
               >
                 <Typography color="white" fontSize={16}>
                   {t('common.details')}
                 </Typography>
-              </LocalizedLink>
-            </Button>
+              </Button>
+            </LocalizedLink>
           </Grid>
         </Grid>
       </CardContent>
