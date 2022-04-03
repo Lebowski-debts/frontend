@@ -10,6 +10,7 @@ import i18n from '@common/translate';
 
 import { RootRouter } from './routers';
 import { store } from './store';
+import './index.scss';
 
 sagaMiddleware.run(sagas);
 

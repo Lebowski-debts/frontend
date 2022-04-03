@@ -60,12 +60,14 @@ function* getLenderDebtorDebtsSaga(
 
     yield put(debtsSlice.actions.fill(debts));
 
-    yield put(
-      usersSlice.actions.fill({
-        [lenderId]: lenderUser,
-        [debtorId]: debtorUser,
-      })
-    );
+    if (lenderUser && debtorUser) {
+      yield put(
+        usersSlice.actions.fill({
+          [lenderId]: lenderUser,
+          [debtorId]: debtorUser,
+        })
+      );
+    }
 
     yield put(
       getLenderDebtorDebtsSlice.actions.success({
