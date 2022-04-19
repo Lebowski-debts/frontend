@@ -14,6 +14,7 @@ import {
 import { ApiGetDebt } from '@common/types/api/debt';
 import { Space } from '@components/Space';
 import { Circle } from '@components/Circle';
+import { formatDate } from '@common/helpers/dates';
 
 export interface Props extends ApiGetDebt {
   index: number;
@@ -58,7 +59,7 @@ export const LenderDebtorDebtsListItem: React.FC<Props> = ({
             <Space />
 
             <Typography fontSize={16} fontWeight={700}>
-              {createdAt}
+              {formatDate(createdAt)}
             </Typography>
           </Box>
 
@@ -81,7 +82,7 @@ export const LenderDebtorDebtsListItem: React.FC<Props> = ({
           <Grid item xs={12} display="flex">
             <Typography fontSize={16}>{t('debts.debt_expires_at')}:</Typography>
             <Space />
-            {expireDate}
+            {formatDate(expireDate)}
           </Grid>
         </Grid>
 

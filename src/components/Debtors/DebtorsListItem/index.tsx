@@ -15,6 +15,7 @@ import { ROOT_ROUTES } from '@common/constants/routes';
 import { Avatar } from '@components/Avatar';
 import { Space } from '@components/Space';
 import { LocalizedLink } from '@components/LocalizedLink';
+import { formatDate } from '@common/helpers/dates';
 
 export interface Props extends ApiGetDebtor {
   lenderId: number;
@@ -74,7 +75,7 @@ export const DebtorsListItem: React.FC<Props> = ({
               </Typography>
               <Typography fontSize={16} fontWeight={700}>
                 <Space />
-                {debtsInfo.lastDebtDate}
+                {formatDate(debtsInfo.lastDebtDate)}
               </Typography>
             </Grid>
 
