@@ -3,6 +3,8 @@ import { Provider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers';
 
 import { sagaMiddleware } from '@common/store/middlewares';
 import { sagas } from '@store/sagas';
@@ -42,8 +44,10 @@ export const App = () => {
     <I18nextProvider i18n={i18n}>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <RootRouter />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <CssBaseline />
+            <RootRouter />
+          </LocalizationProvider>
         </ThemeProvider>
       </Provider>
     </I18nextProvider>

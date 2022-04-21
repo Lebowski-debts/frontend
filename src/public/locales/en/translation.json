@@ -13,7 +13,20 @@
     "debt_expires_at": "Should return until",
     "pay_the_debt_off": "Pay the debt off"
   },
+  "debt_form": {
+    "create_new_debt": "Create new debt",
+    "edit_debt": "Edit debt",
+    "debtor_field_label": "Debtor",
+    "sum_field_label": "Sum",
+    "expiration_field_label": "Expiration date",
+    "comment_field_label": "Comment",
+    "sum_should_be_greater": "Sum should be greater than 0"
+  },
   "common": {
-    "details": "Details"
+    "details": "Details",
+    "submit": "Submit"
+  },
+  "errors": {
+    "required_field": "This field is required"
   }
 }

@@ -13,7 +13,20 @@
     "debt_expires_at": "Когда должен вернуть",
     "pay_the_debt_off": "Погасить долг"
   },
+  "debt_form": {
+    "create_new_debt": "Новый долг",
+    "edit_debt": "Редактировать долг",
+    "debtor_field_label": "Должник",
+    "sum_field_label": "Сумма долга",
+    "expiration_field_label": "Должен отдать до",
+    "comment_field_label": "Комментарий",
+    "sum_should_be_greater": "Сумма должна быть больше 0"
+  },
   "common": {
-    "details": "Подробнее"
+    "details": "Подробнее",
+    "submit": "Подтвердить"
+  },
+  "errors": {
+    "required_field": "Это поле обязательное"
   }
 }

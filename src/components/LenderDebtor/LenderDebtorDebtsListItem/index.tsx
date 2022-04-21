@@ -89,9 +89,9 @@ export const LenderDebtorDebtsListItem: React.FC<Props> = ({
         <Button
           sx={{
             background: palette.primary.light,
-            width: '100%',
             marginTop: 45,
           }}
+          fullWidth
           size="large"
         >
           <Typography color="white" fontSize={16}>

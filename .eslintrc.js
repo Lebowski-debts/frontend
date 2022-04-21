@@ -14,6 +14,7 @@ module.exports = {
     "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/no-unnecessary-type-assertion": "off",
     "react/button-has-type": "off",
     "react/no-array-index-key": "off",
     "react/jsx-props-no-spreading": "off",
