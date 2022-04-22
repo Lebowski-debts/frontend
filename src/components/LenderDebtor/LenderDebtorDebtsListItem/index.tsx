@@ -15,6 +15,7 @@ import { ApiGetDebt } from '@common/types/api/debt';
 import { Space } from '@components/Space';
 import { Circle } from '@components/Circle';
 import { formatDate } from '@common/helpers/dates';
+import { prettifyNumber } from '@common/helpers/number';
 
 export interface Props extends ApiGetDebt {
   index: number;
@@ -70,13 +71,13 @@ export const LenderDebtorDebtsListItem: React.FC<Props> = ({
           <Grid item xs={12} display="flex">
             <Typography fontSize={16}>{t('debts.debt_sum')}:</Typography>
             <Space />
-            {initialSum}
+            {prettifyNumber(initialSum)}
           </Grid>
 
           <Grid item xs={12} display="flex">
             <Typography fontSize={16}>{t('debts.debt_rest')}:</Typography>
             <Space />
-            {actualSum}
+            {prettifyNumber(actualSum)}
           </Grid>
 
           <Grid item xs={12} display="flex">

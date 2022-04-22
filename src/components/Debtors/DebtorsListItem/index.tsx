@@ -16,6 +16,7 @@ import { Avatar } from '@components/Avatar';
 import { Space } from '@components/Space';
 import { LocalizedLink } from '@components/LocalizedLink';
 import { formatDate } from '@common/helpers/dates';
+import { prettifyNumber } from '@common/helpers/number';
 
 export interface Props extends ApiGetDebtor {
   lenderId: number;
@@ -55,7 +56,7 @@ export const DebtorsListItem: React.FC<Props> = ({
               </Typography>
               <Typography fontSize={16} fontWeight={700}>
                 <Space />
-                {debtsInfo.initialSum}
+                {prettifyNumber(debtsInfo.initialSum)}
               </Typography>
             </Grid>
 
