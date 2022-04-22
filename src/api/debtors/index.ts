@@ -1,7 +1,11 @@
 import { apiClient } from '@api';
-import { API_ROUTES, DEFAULT_DEBTORS_LIST_PARAMS } from '@common/constants/api';
+import {
+  API_ROUTES,
+  DEFAULT_DEBTORS_LIST_PARAMS,
+  DEFAULT_LIST_PARAMS,
+} from '@common/constants/api';
 import { PaginatedHttpSuccessResponse } from '@common/types/api';
-import { ApiGetDebtorDebts } from '@common/types/api/debt';
+import { ApiCreateDebt, ApiGetDebtorDebts } from '@common/types/api/debt';
 import { ApiGetDebtor, ApiGetDebtorsParams } from '@common/types/api/debtor';
 
 export const debtorsApi = {
@@ -13,11 +17,19 @@ export const debtorsApi = {
       }
     ),
 
-  getDebotrDebts: (fromId: number, toId: number, params: ApiGetDebtorsParams) =>
-    apiClient.get<ApiGetDebtorDebts>(
+  getDebotrDebts: (
+    fromId: number,
+    toId: number,
+    params: ApiGetDebtorsParams
+  ) => {
+    return apiClient.get<ApiGetDebtorDebts>(
       `${API_ROUTES.DEBT}/debts/from/${fromId}/to/${toId}`,
       {
-        params,
+        params: { ...DEFAULT_LIST_PARAMS, ...params },
       }
-    ),
+    );
+  },
+
+  createDebtorDebt: (data: ApiCreateDebt) =>
+    apiClient.post(API_ROUTES.DEBT, data),
 };

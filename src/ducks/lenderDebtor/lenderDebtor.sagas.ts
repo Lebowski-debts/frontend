@@ -10,19 +10,6 @@ import { debtsSlice } from '@ducks/debts/debts.slice';
 import { getLenderDebtorDebtsSlice } from './lenderDebtor.slice';
 import { GetLenderDebtorDebtsPayload } from './lenderDebtor.types';
 
-// TODO: implement normalizr
-
-// const fakeDebt: ApiGetDebt = {
-//   actualSum: 100,
-//   createdAt: '10.01.2022',
-//   expireDate: '11.01.2022',
-//   id: 1,
-//   initialSum: 1000,
-//   isExpired: false,
-//   isPaid: false,
-//   paymentStatus: 'IN_PROGRESS',
-// };
-
 function* getLenderDebtorDebtsSaga(
   action: PayloadAction<GetLenderDebtorDebtsPayload>
 ) {
@@ -37,19 +24,6 @@ function* getLenderDebtorDebtsSaga(
       debtorId,
       params
     )) as AxiosResponse<ApiGetDebtorDebts>;
-
-    // data.push(
-    //   fakeDebt,
-    //   { ...fakeDebt, id: 2, paymentStatus: 'NEW' },
-    //   { ...fakeDebt, id: 3, paymentStatus: 'PAID' },
-    //   { ...fakeDebt, id: 4, isExpired: true },
-    //   { ...fakeDebt, id: 5 },
-    //   { ...fakeDebt, id: 6 },
-    //   { ...fakeDebt, id: 7 },
-    //   { ...fakeDebt, id: 8 },
-    //   { ...fakeDebt, id: 9 },
-    //   { ...fakeDebt, id: 10 }
-    // );
 
     const debtIds = data.map((debt) => debt.id);
 

@@ -18,3 +18,11 @@ export interface ApiGetDebtorDebts
   lenderUser: ApiGetUser;
   debtorUser: ApiGetUser;
 }
+
+export interface ApiCreateDebt {
+  debtorId: number;
+  lenderId: number;
+  sum: number;
+  expireDate: string;
+  comment?: string;
+}

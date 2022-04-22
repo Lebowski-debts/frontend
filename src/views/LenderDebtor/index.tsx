@@ -30,7 +30,14 @@ export const LenderDebtorView: React.FC = () => {
             <ArrowBackIosIcon />
           </LocalizedLink>
         ),
-        rightButton: <AddIcon />,
+        rightButton: (
+          <LocalizedLink
+            style={{ height: 24 }}
+            to={`${ROOT_ROUTES.DEBTORS}/debtorId/${debtorId}/new-debt`}
+          >
+            <AddIcon />
+          </LocalizedLink>
+        ),
         children: debtor ? (
           <Box display="flex" alignItems="center">
             <Avatar userName={debtor.nickname || debtor.telegramUserLogin} />

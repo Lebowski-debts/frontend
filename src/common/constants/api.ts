@@ -4,10 +4,11 @@ export const API_ROUTES = {
 
 export const DEFAULT_LIST_PARAMS = {
   sortType: 'desc',
-  orderField: 'lastDebtDate',
+  onPage: 5,
 };
 
 export const DEFAULT_DEBTORS_LIST_PARAMS = {
   ...DEFAULT_LIST_PARAMS,
+  orderField: 'lastDebtDate',
   paymentStatusList: '',
 };

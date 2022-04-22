@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { ROOT_ROUTES } from '@common/constants/routes';
 import { DebtorsView } from '@views/Debtors';
 import { LenderDebtorView } from '@views/LenderDebtor';
-import { DebtForm } from '@components/DebtForm';
+import { CreateDebtorDebtView } from '@views/CreateDebtorDebt';
 
 export const AppRouter: React.FC<
   RouteComponentProps<any, StaticContext, unknown>
@@ -40,7 +40,7 @@ export const AppRouter: React.FC<
         path={`${url}${ROOT_ROUTES.DEBTORS}/debtorId/:debtorId/new-debt`}
         exact
       >
-        <DebtForm title="New debt" />
+        <CreateDebtorDebtView />
       </Route>
     </Switch>
   );
