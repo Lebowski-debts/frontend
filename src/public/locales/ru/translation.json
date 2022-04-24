@@ -24,7 +24,8 @@
   },
   "common": {
     "details": "Подробнее",
-    "submit": "Подтвердить"
+    "submit": "Подтвердить",
+    "loading": "Загрузка"
   },
   "errors": {
     "required_field": "Это поле обязательное"
