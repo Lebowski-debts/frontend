@@ -2,20 +2,14 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 
-import {
-  Autocomplete,
-  Box,
-  Grid,
-  Paper,
-  TextField,
-  useTheme,
-} from '@mui/material';
+import { Box, Grid, Paper, TextField, useTheme } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import { LoadingButton } from '@mui/lab';
 
 import { ApiCreateDebt } from '@common/types/api/debt';
 import { AbsoluteProgress } from '@components/AbsoluteProgress';
+import { UsersAutoComplete } from '@components/UsersAutoComplete';
 
 export type FormData = Omit<Omit<ApiCreateDebt, 'lenderId'>, 'debtorId'> & {
   debtorId: null | number;
@@ -63,25 +57,14 @@ export const DebtForm: React.FC<Props> = ({
         <Paper sx={{ padding: 14, height: 330 }}>
           <Grid container spacing={20}>
             <Grid item xs={12}>
-              <Autocomplete
-                options={[]}
-                renderInput={(props) => (
-                  <Controller
-                    control={control}
-                    name="debtorId"
-                    rules={{ required: t('errors.required_field') as string }}
-                    render={({ field }) => (
-                      <TextField
-                        {...props}
-                        {...field}
-                        error={!!errors.debtorId}
-                        helperText={errors.debtorId?.message}
-                        // required
-                        color="secondary"
-                        label={t('debt_form.debtor_field_label')}
-                        fullWidth
-                      />
-                    )}
+              <Controller
+                control={control}
+                name="debtorId"
+                rules={{ required: t('errors.required_field') as string }}
+                render={({ field }) => (
+                  <UsersAutoComplete
+                    selectedUserId={field.value || undefined}
+                    {...field}
                   />
                 )}
               />

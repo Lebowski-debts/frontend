@@ -24,7 +24,8 @@
   },
   "common": {
     "details": "Details",
-    "submit": "Submit"
+    "submit": "Submit",
+    "loading": "Loading"
   },
   "errors": {
     "required_field": "This field is required"

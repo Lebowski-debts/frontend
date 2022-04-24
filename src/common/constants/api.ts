@@ -1,5 +1,6 @@
 export const API_ROUTES = {
   DEBT: '/debt',
+  USER: '/user',
 };
 
 export const DEFAULT_LIST_PARAMS = {
