@@ -22,6 +22,9 @@
     "comment_field_label": "Comment",
     "sum_should_be_greater": "Sum should be greater than 0"
   },
+  "pay_the_debt_off": {
+    "pay_the_debt_off_form_title": "Pay the debt off"
+  },
   "common": {
     "details": "Details",
     "submit": "Submit",

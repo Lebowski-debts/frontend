@@ -26,3 +26,8 @@ export interface ApiCreateDebt {
   expireDate: string;
   comment?: string;
 }
+
+export interface ApiPayTheDebtOff {
+  isFullPayment: boolean;
+  paidSum: number;
+}

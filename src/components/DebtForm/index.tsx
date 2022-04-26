@@ -54,7 +54,7 @@ export const DebtForm: React.FC<Props> = ({
         padding={14}
         overflow="auto"
       >
-        <Paper sx={{ padding: 14, height: 330 }}>
+        <Paper sx={{ padding: 16, height: 330 }}>
           <Grid container spacing={20}>
             <Grid item xs={12}>
               <Controller
@@ -152,6 +152,7 @@ export const DebtForm: React.FC<Props> = ({
           <LoadingButton
             loading={isUploading}
             loadingPosition="start"
+            startIcon={<></>}
             type="submit"
             size="large"
             fullWidth

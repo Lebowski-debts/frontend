@@ -22,6 +22,9 @@
     "comment_field_label": "Комментарий",
     "sum_should_be_greater": "Сумма должна быть больше 0"
   },
+  "pay_the_debt_off": {
+    "pay_the_debt_off_form_title": "Погасить долг"
+  },
   "common": {
     "details": "Подробнее",
     "submit": "Подтвердить",

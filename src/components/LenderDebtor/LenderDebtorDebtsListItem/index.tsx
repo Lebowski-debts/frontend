@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import {
   Box,
@@ -16,9 +17,12 @@ import { Space } from '@components/Space';
 import { Circle } from '@components/Circle';
 import { formatDate } from '@common/helpers/dates';
 import { prettifyNumber } from '@common/helpers/number';
+import { LocalizedLink } from '@components/LocalizedLink';
+import { ROOT_ROUTES } from '@common/constants/routes';
 
 export interface Props extends ApiGetDebt {
-  index: number;
+  index?: number;
+  showPayButton?: boolean;
 }
 
 export const LenderDebtorDebtsListItem: React.FC<Props> = ({
@@ -28,10 +32,15 @@ export const LenderDebtorDebtsListItem: React.FC<Props> = ({
   initialSum,
   isExpired,
   paymentStatus,
-  index,
+  index = null,
+  id,
+  showPayButton = true,
 }) => {
+  if (!id) return null;
   const { t } = useTranslation();
   const { palette } = useTheme();
+
+  const { debtorId } = useParams<{ debtorId: string }>();
 
   const colorsByDebtStatus = {
     NEW: palette.secondary.main,
@@ -54,7 +63,8 @@ export const LenderDebtorDebtsListItem: React.FC<Props> = ({
         >
           <Box display="flex">
             <Typography fontSize={16} fontWeight={500}>
-              {index}. {t('debts.debt_created_at')}
+              {index ? `${index}. ` : ''}
+              {t('debts.debt_created_at')}
             </Typography>
 
             <Space />
@@ -87,18 +97,24 @@ export const LenderDebtorDebtsListItem: React.FC<Props> = ({
           </Grid>
         </Grid>
 
-        <Button
-          sx={{
-            background: palette.primary.light,
-            marginTop: 45,
-          }}
-          fullWidth
-          size="large"
-        >
-          <Typography color="white" fontSize={16}>
-            {t('debts.pay_the_debt_off')}
-          </Typography>
-        </Button>
+        {showPayButton && (
+          <LocalizedLink
+            to={`${ROOT_ROUTES.DEBTORS}/debtorId/${debtorId}/pay-the-debt-off/${id}`}
+          >
+            <Button
+              sx={{
+                background: palette.primary.light,
+                marginTop: 45,
+              }}
+              fullWidth
+              size="large"
+            >
+              <Typography color="white" fontSize={16}>
+                {t('debts.pay_the_debt_off')}
+              </Typography>
+            </Button>
+          </LocalizedLink>
+        )}
       </CardContent>
     </Card>
   );

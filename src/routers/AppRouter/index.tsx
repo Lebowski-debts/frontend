@@ -7,6 +7,7 @@ import { ROOT_ROUTES } from '@common/constants/routes';
 import { DebtorsView } from '@views/Debtors';
 import { LenderDebtorView } from '@views/LenderDebtor';
 import { CreateDebtorDebtView } from '@views/CreateDebtorDebt';
+import { PayTheDebtOffView } from '@views/PayTheDebtOff';
 
 export const AppRouter: React.FC<
   RouteComponentProps<any, StaticContext, unknown>
@@ -41,6 +42,13 @@ export const AppRouter: React.FC<
         exact
       >
         <CreateDebtorDebtView />
+      </Route>
+
+      <Route
+        path={`${url}${ROOT_ROUTES.DEBTORS}/debtorId/:debtorId/pay-the-debt-off/:debtId`}
+        exact
+      >
+        <PayTheDebtOffView />
       </Route>
     </Switch>
   );

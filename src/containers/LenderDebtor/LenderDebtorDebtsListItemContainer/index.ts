@@ -5,7 +5,7 @@ import { selectDebtById } from '@ducks/debts/debts.selectors';
 import { RootState } from '@store';
 
 const mapStateToProps = (state: RootState, { debtId }: { debtId: number }) =>
-  selectDebtById(state, debtId);
+  selectDebtById(state, debtId) || {};
 
 export const LenderDebtorDebtsListItemContainer = connect(mapStateToProps)(
   LenderDebtorDebtsListItem
