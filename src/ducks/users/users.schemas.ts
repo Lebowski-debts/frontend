@@ -5,6 +5,6 @@ export const userSchema = new schema.Entity(
   {},
   {
     idAttribute: (value: unknown & { id?: number; telegramUserId?: number }) =>
-      (value.id || value.telegramUserId) as unknown as string,
+      (value.telegramUserId || value.id) as unknown as string,
   }
 );

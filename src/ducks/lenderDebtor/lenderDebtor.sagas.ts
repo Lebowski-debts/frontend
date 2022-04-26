@@ -1,11 +1,15 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { normalize, schema } from 'normalizr';
 
-import { ApiGetDebtorDebts } from '@common/types/api/debt';
+import { ApiGetDebt, ApiGetDebtorDebts } from '@common/types/api/debt';
 import { debtorsApi } from '@api/debtors';
 import { usersSlice } from '@ducks/users/users.slice';
 import { debtsSlice } from '@ducks/debts/debts.slice';
+import { ApiGetUser } from '@common/types/api/user';
+import { NormalizedListValues } from '@common/types/api';
+import { userSchema } from '@ducks/users/users.schemas';
 
 import { getLenderDebtorDebtsSlice } from './lenderDebtor.slice';
 import { GetLenderDebtorDebtsPayload } from './lenderDebtor.types';
@@ -16,31 +20,41 @@ function* getLenderDebtorDebtsSaga(
   const { lenderId, debtorId, ...params } = action.payload;
 
   try {
-    const {
-      data: { data, lenderUser, debtorUser, ...paginationData },
-    } = (yield call(
+    const { data } = (yield call(
       debtorsApi.getDebotrDebts,
       lenderId,
       debtorId,
       params
     )) as AxiosResponse<ApiGetDebtorDebts>;
 
-    const debtIds = data.map((debt) => debt.id);
+    const { data: debtsData, lenderUser, debtorUser, ...paginationData } = data;
 
-    const debts = data.reduce(
-      (accum, value) => ({ ...accum, [value.id]: value }),
-      {}
-    );
+    const debtSchema = new schema.Entity('debts');
+
+    const dataSchema = new schema.Object({
+      data: [debtSchema],
+      lenderUser: userSchema,
+      debtorUser: userSchema,
+    });
+
+    const normalizedData = normalize<
+      ApiGetDebtorDebts,
+      {
+        user: NormalizedListValues<ApiGetUser>;
+        debts: NormalizedListValues<ApiGetDebt>;
+      },
+      { data: number[] }
+    >(data, dataSchema);
+
+    const {
+      entities: { debts, user },
+      result: { data: debtIds },
+    } = normalizedData;
 
     yield put(debtsSlice.actions.fill(debts));
 
-    if (lenderUser && debtorUser) {
-      yield put(
-        usersSlice.actions.fill({
-          [lenderId]: lenderUser,
-          [debtorId]: debtorUser,
-        })
-      );
+    if (user) {
+      yield put(usersSlice.actions.fill(user));
     }
 
     yield put(
