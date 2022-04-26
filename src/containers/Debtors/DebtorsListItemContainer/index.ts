@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { DebtorsListItem, Props } from '@components/Debtors/DebtorsListItem';
+import { DebtorsListItem, Props } from '@components/Debtor/DebtorsListItem';
 import { selectDebtorDebtsInfo } from '@ducks/debtors/debtors.selectors';
 import { selectUser } from '@ducks/users/users.selector';
 import { RootState } from '@store';

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { DebtorsList } from '@components/Debtors/DebtorsList';
+import { DebtorsList } from '@components/Debtor/DebtorsList';
 import {
   selectDebtorsListIds,
   selectGetDebtorsIsProcessing,
