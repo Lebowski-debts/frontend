@@ -17,7 +17,8 @@ export interface OwnProps {
 }
 
 const mapStateToProps = (state: RootState, { lenderId, debtorId }: OwnProps) =>
-  selectLenderDebtorDebts(state, getLenderDebtorMapKey(lenderId, debtorId));
+  selectLenderDebtorDebts(state, getLenderDebtorMapKey(lenderId, debtorId)) ||
+  {};
 
 const mapDispatchToProps = (
   dispatch: Dispatch,
