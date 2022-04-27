@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, LinkProps } from 'react-router-dom';
+import { Link, LinkProps, useLocation } from 'react-router-dom';
 
 import { useTheme } from '@mui/material';
 
@@ -10,12 +10,20 @@ export const LocalizedLink: React.FC<LinkProps> = ({ to, ...props }) => {
   } = useTranslation();
 
   const { palette } = useTheme();
+  const { pathname, search } = useLocation();
+
+  const url = `/${language}${to.toString()}`;
+
+  const params = new URLSearchParams(search);
+  params.set('prevRoute', pathname.replace(`/${language}`, ''));
+
+  const searchString = `?${params.toString()}`;
 
   return (
     <Link
       {...props}
       style={{ ...props.style, color: palette.secondary.main }}
-      to={`/${language}${to.toString()}`}
+      to={{ pathname: url, search: searchString }}
     />
   );
 };

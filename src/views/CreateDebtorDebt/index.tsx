@@ -19,6 +19,7 @@ import { useOnSuccess } from '@common/hooks/useOnSuccess';
 import { ROOT_ROUTES } from '@common/constants/routes';
 import { LocalizedLink } from '@components/LocalizedLink';
 import { AppLayout } from '@components/AppLayout';
+import { usePrevRoute } from '@common/hooks/usePrevRoute';
 
 export const CreateDebtorDebtView: React.FC = () => {
   const { debtorId } = useParams<{ debtorId: string }>();
@@ -44,11 +45,13 @@ export const CreateDebtorDebtView: React.FC = () => {
     history.push(ROOT_ROUTES.HOME);
   }, createDebtState);
 
+  const prevRoute = usePrevRoute();
+
   return (
     <AppLayout
       headerProps={{
         leftButton: (
-          <LocalizedLink style={{ height: 24 }} to={ROOT_ROUTES.DEBTORS}>
+          <LocalizedLink style={{ height: 24 }} to={prevRoute}>
             <ArrowBackIos />
           </LocalizedLink>
         ),

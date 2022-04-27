@@ -18,6 +18,7 @@ import {
   selectIsPayTheDebtOffUploading,
   selectPayTheDebtOff,
 } from '@ducks/debts/debts.selectors';
+import { usePrevRoute } from '@common/hooks/usePrevRoute';
 
 export const PayTheDebtOffView = () => {
   // TODO: fetch data for debt card in case if user reloads page
@@ -37,11 +38,13 @@ export const PayTheDebtOffView = () => {
     history.push(ROOT_ROUTES.DEBTORS);
   }, payTheDebtOffState);
 
+  const prevRoute = usePrevRoute();
+
   return (
     <AppLayout
       headerProps={{
         leftButton: (
-          <LocalizedLink style={{ height: 24 }} to={ROOT_ROUTES.DEBTORS}>
+          <LocalizedLink style={{ height: 24 }} to={prevRoute}>
             <ArrowBackIos />
           </LocalizedLink>
         ),

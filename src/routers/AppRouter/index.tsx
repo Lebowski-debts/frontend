@@ -30,24 +30,15 @@ export const AppRouter: React.FC<
         <DebtorsView />
       </Route>
 
-      <Route
-        path={`${url}${ROOT_ROUTES.DEBTORS}/debtorId/:debtorId/lenderId/:lenderId${ROOT_ROUTES.DEBTS}`}
-        exact
-      >
+      <Route path={`${url}${ROOT_ROUTES.LENDER_DEBTOR_DEBTS}`} exact>
         <LenderDebtorView />
       </Route>
 
-      <Route
-        path={`${url}${ROOT_ROUTES.DEBTORS}/debtorId/:debtorId/new-debt`}
-        exact
-      >
+      <Route path={`${url}${ROOT_ROUTES.CREATE_DEBTOR_DEBT}`} exact>
         <CreateDebtorDebtView />
       </Route>
 
-      <Route
-        path={`${url}${ROOT_ROUTES.DEBTORS}/debtorId/:debtorId/pay-the-debt-off/:debtId`}
-        exact
-      >
+      <Route path={`${url}${ROOT_ROUTES.PAY_THE_DEBT_OFF}`} exact>
         <PayTheDebtOffView />
       </Route>
     </Switch>

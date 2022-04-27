@@ -48,7 +48,7 @@ export const DebtorsList: React.FC<Props> = ({
 
   return (
     <InfiniteScrollLayout
-      isProcessing={isProcessing || !!currentPage}
+      isProcessing={isProcessing && !!currentPage}
       getData={(apiListParams) =>
         getData({ ...apiListParams, userId: myTelegramUserId })
       }
@@ -62,20 +62,16 @@ export const DebtorsList: React.FC<Props> = ({
     >
       {isProcessing && !currentPage && <AbsoluteProgress />}
 
-      {!!data?.keys.length &&
-        data?.keys.map((id, index) => (
-          <Grid
-            item
-            key={id}
-            xs={12}
-            marginBottom={index === data?.keys.length - 1 ? 0 : 20}
-          >
-            <DebtorsListItemContainer
-              lenderId={myTelegramUserId}
-              debtorId={id}
-            />
-          </Grid>
-        ))}
+      {data?.keys.map((id, index) => (
+        <Grid
+          item
+          key={id}
+          xs={12}
+          marginBottom={index === data?.keys.length - 1 ? 0 : 20}
+        >
+          <DebtorsListItemContainer lenderId={myTelegramUserId} debtorId={id} />
+        </Grid>
+      ))}
 
       {!data?.keys.length && !isProcessing && (
         <Grid item margin="auto">
