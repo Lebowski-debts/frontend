@@ -15,20 +15,20 @@ const isPathObject = (path: string | HistoryPath): path is HistoryPath =>
   !!(path as HistoryPath).key ||
   !!(path as HistoryPath).state;
 
-export const useLocalizedHistoryPush = (
-  path: HistoryPath | string,
-  state?: any
-) => {
+export const useLocalizedHistoryPush = () => {
   const history = useHistory();
   const {
     i18n: { language },
   } = useTranslation();
 
-  if (isPathObject(path)) {
-    path.pathname = `${language}${path.pathname || ''}`;
+  return (path: HistoryPath | string, state?: any) => {
+    if (isPathObject(path)) {
+      path.pathname = `${language}${path.pathname || ''}`;
 
-    return history.push(path as unknown as string, state);
-  }
+      history.push(path as unknown as string, state);
+      return;
+    }
 
-  return history.push(`/${language}${path}`, state);
+    history.push(`/${language}${path}`, state);
+  };
 };

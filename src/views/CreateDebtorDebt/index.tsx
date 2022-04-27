@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import dayjs from 'dayjs';
 import { Typography } from '@mui/material';
@@ -16,16 +16,18 @@ import {
 } from '@ducks/debts/debts.selectors';
 import { createDebtSlice } from '@ducks/debts/debts.slice';
 import { useOnSuccess } from '@common/hooks/useOnSuccess';
-import { ROOT_ROUTES } from '@common/constants/routes';
 import { LocalizedLink } from '@components/LocalizedLink';
 import { AppLayout } from '@components/AppLayout';
 import { usePrevRoute } from '@common/hooks/usePrevRoute';
+import { useLocalizedHistoryPush } from '@common/hooks/useLocalizedHistoryPush';
 
 export const CreateDebtorDebtView: React.FC = () => {
   const { debtorId } = useParams<{ debtorId: string }>();
-  const history = useHistory();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+
+  const historyPush = useLocalizedHistoryPush();
+  const prevRoute = usePrevRoute();
 
   const createDebtState = useAppSelector(selectCreateDebtState);
   const isUploading = useAppSelector(selectIsCreateDebtUploading);
@@ -42,10 +44,8 @@ export const CreateDebtorDebtView: React.FC = () => {
   };
 
   useOnSuccess(() => {
-    history.push(ROOT_ROUTES.HOME);
+    historyPush(prevRoute);
   }, createDebtState);
-
-  const prevRoute = usePrevRoute();
 
   return (
     <AppLayout
