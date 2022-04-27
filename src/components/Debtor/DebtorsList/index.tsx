@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Grid, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 import { AbsoluteProgress } from '@components/AbsoluteProgress';
 import { GetDebtorsPayload } from '@ducks/debtors/debtors.types';
@@ -63,20 +63,21 @@ export const DebtorsList: React.FC<Props> = ({
       {isProcessing && !currentPage && <AbsoluteProgress />}
 
       {data?.keys.map((id, index) => (
-        <Grid
-          item
-          key={id}
-          xs={12}
-          marginBottom={index === data?.keys.length - 1 ? 0 : 20}
-        >
-          <DebtorsListItemContainer lenderId={myTelegramUserId} debtorId={id} />
-        </Grid>
+        <Box key={id} marginBottom={index === data?.keys.length - 1 ? 0 : 20}>
+          <DebtorsListItemContainer debtorId={id} />
+        </Box>
       ))}
 
       {!data?.keys.length && !isProcessing && (
-        <Grid item margin="auto">
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          height="100%"
+          width="100%"
+        >
           <Typography fontSize={24}>{t('debtors.no_debtors_yet')}</Typography>
-        </Grid>
+        </Box>
       )}
     </InfiniteScrollLayout>
   );

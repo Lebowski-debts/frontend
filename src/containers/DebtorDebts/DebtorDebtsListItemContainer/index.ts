@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
 
-import { LenderDebtorDebtsListItem } from '@components/LenderDebtor/LenderDebtorDebtsListItem';
+import { DebtorDebtsListItem } from '@components/DebtorDebts/DebtorDebtsListItem';
 import { selectDebtById } from '@ducks/debts/debts.selectors';
 import { RootState } from '@store';
 
 const mapStateToProps = (state: RootState, { debtId }: { debtId: number }) =>
   selectDebtById(state, debtId) || {};
 
-export const LenderDebtorDebtsListItemContainer = connect(mapStateToProps)(
-  LenderDebtorDebtsListItem
-);
+export const DebtorDebtsListItemContainer =
+  connect(mapStateToProps)(DebtorDebtsListItem);

@@ -25,7 +25,7 @@ export interface Props extends ApiGetDebt {
   showPayButton?: boolean;
 }
 
-export const LenderDebtorDebtsListItem: React.FC<Props> = ({
+export const DebtorDebtsListItem: React.FC<Props> = ({
   actualSum,
   createdAt,
   expireDate,

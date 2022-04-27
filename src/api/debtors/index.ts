@@ -21,7 +21,7 @@ export const debtorsApi = {
       }
     ),
 
-  getDebotrDebts: (
+  getDebtorDebts: (
     fromId: number,
     toId: number,
     params: ApiGetDebtorsParams

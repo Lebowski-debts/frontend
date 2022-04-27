@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 
 import { AbsoluteProgress } from '@components/AbsoluteProgress';
 import { AsyncState } from '@common/store/helpers';
 import { ApiListParams, PaginatedHttpSuccessResponse } from '@common/types/api';
-import { LenderDebtorDebtsListItemContainer } from '@containers/LenderDebtor/LenderDebtorDebtsListItemContainer';
 import { InfiniteScrollLayout } from '@components/InfiniteScrollLayout';
+import { DebtorDebtsListItemContainer } from '@containers/DebtorDebts/DebtorDebtsListItemContainer';
 
 export interface Props
   extends AsyncState<PaginatedHttpSuccessResponse<number[]>, unknown> {
@@ -15,7 +15,7 @@ export interface Props
   resetData: () => void;
 }
 
-export const LenderDebtorDebtsList: React.FC<Props> = ({
+export const DebtorDebtsList: React.FC<Props> = ({
   getData,
   resetData,
   isProcessing = false,
@@ -45,28 +45,33 @@ export const LenderDebtorDebtsList: React.FC<Props> = ({
     >
       {isProcessing && !currentPage && <AbsoluteProgress />}
 
-      {!!data.length &&
-        data.map((id, index) => (
-          <Grid
-            item
+      {data.map((id, index) => (
+        <Grid
+          item
+          key={id}
+          xs={12}
+          marginBottom={index === data.length - 1 ? 0 : 20}
+        >
+          <DebtorDebtsListItemContainer
             key={id}
-            xs={12}
-            marginBottom={index === data.length - 1 ? 0 : 20}
-          >
-            <LenderDebtorDebtsListItemContainer
-              key={id}
-              index={index + 1}
-              debtId={id}
-            />
-          </Grid>
-        ))}
+            index={index + 1}
+            debtId={id}
+          />
+        </Grid>
+      ))}
 
       {!isProcessing && !data.length && (
-        <Grid item margin="auto">
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          height="100%"
+          width="100%"
+        >
           <Typography fontSize={24}>
             {t('debtors.debtor_has_no_debts')}
           </Typography>
-        </Grid>
+        </Box>
       )}
     </InfiniteScrollLayout>
   );

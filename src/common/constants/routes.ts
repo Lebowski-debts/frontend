@@ -5,12 +5,12 @@ export const ROOT_ROUTES = {
 
   DEBTS: '/debts',
 
-  get LENDER_DEBTOR_DEBTS() {
-    return `${this.DEBTORS}/debtorId/:debtorId/lenderId/:lenderId${this.DEBTS}`;
+  get DEBTOR_DEBTS() {
+    return `${this.DEBTORS}/debtorId/:debtorId${this.DEBTS}`;
   },
 
-  getLenderDebtorDebtsRoute: (lenderId: number, debtorId: number) =>
-    `${ROOT_ROUTES.DEBTORS}/debtorId/${debtorId}/lenderId/${lenderId}${ROOT_ROUTES.DEBTS}`,
+  getDebtorDebtsRoute: (debtorId: number) =>
+    `${ROOT_ROUTES.DEBTORS}/debtorId/${debtorId}${ROOT_ROUTES.DEBTS}`,
 
   get CREATE_DEBTOR_DEBT() {
     return `${this.DEBTORS}/debtorId/:debtorId/new-debt`;

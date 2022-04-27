@@ -5,7 +5,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import AddIcon from '@mui/icons-material/Add';
 import { Box, Typography } from '@mui/material';
 
-import { LenderDebtorDebtsListContainer } from '@containers/LenderDebtor/LenderDebtorDebtsListContainer';
+import { DebtorDebtsListContainer } from '@containers/DebtorDebts/DebtorDebtsListContainer';
 import { AppLayout } from '@components/AppLayout';
 import { Avatar } from '@components/Avatar';
 import { useAppSelector } from '@common/hooks/useAppSelector';
@@ -13,12 +13,10 @@ import { selectUser } from '@ducks/users/users.selector';
 import { ROOT_ROUTES } from '@common/constants/routes';
 import { LocalizedLink } from '@components/LocalizedLink';
 
-export const LenderDebtorView: React.FC = () => {
-  const { debtorId: _debtorId, lenderId: _lenderId } =
-    useParams<{ debtorId: string; lenderId: string }>();
+export const DebtorDebtsView: React.FC = () => {
+  const { debtorId: _debtorId } = useParams<{ debtorId: string }>();
 
   const debtorId = +_debtorId;
-  const lenderId = +_lenderId;
 
   const debtor = useAppSelector((state) => selectUser(state, debtorId));
 
@@ -48,7 +46,7 @@ export const LenderDebtorView: React.FC = () => {
         ) : null,
       }}
     >
-      <LenderDebtorDebtsListContainer debtorId={debtorId} lenderId={lenderId} />
+      <DebtorDebtsListContainer debtorId={debtorId} />
     </AppLayout>
   );
 };

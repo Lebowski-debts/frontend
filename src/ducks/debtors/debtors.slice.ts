@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
-import { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { createAsyncSlice } from '@common/store/helpers';
+import { AsyncState, createAsyncSlice } from '@common/store/helpers';
 import {
   NormalizedList,
   PaginatedHttpSuccessResponse,
 } from '@common/types/api';
 import { ApiGetDebtorDebtsCommonInfo } from '@common/types/api/debtor';
+import { GetDebtorDebtsPayload } from '@ducks/debts/debts.types';
 
 import { GetDebtorsPayload } from './debtors.types';
 
@@ -51,6 +52,77 @@ export const getDebtorsSlice = createAsyncSlice<
   },
 });
 
+export const getLenderDebtorMapKey = (debtorId: number) => `debtor-${debtorId}`;
+
+export const getDebtorDebtsSlice = createSlice({
+  name: 'getDebtorDebts',
+  initialState: {} as {
+    [key: string]: AsyncState<PaginatedHttpSuccessResponse<number[]>, unknown>;
+  },
+  reducers: {
+    request: (state, action: PayloadAction<GetDebtorDebtsPayload>) => {
+      const { debtorId } = action.payload;
+
+      state[getLenderDebtorMapKey(debtorId)] = {
+        ...state[getLenderDebtorMapKey(debtorId)],
+        isProcessing: true,
+      };
+    },
+    success: (
+      state,
+      {
+        payload: { debtorId, ...payload },
+      }: PayloadAction<
+        PaginatedHttpSuccessResponse<number[]> & {
+          debtorId: number;
+        }
+      >
+    ) => {
+      state[getLenderDebtorMapKey(debtorId)] = {
+        ...state[getLenderDebtorMapKey(debtorId)],
+        isProcessing: false,
+        error: null,
+        value: {
+          ...payload,
+          data: Array.from(
+            new Set([
+              ...(state[getLenderDebtorMapKey(debtorId)].value?.data || []),
+              ...payload.data,
+            ])
+          ),
+        },
+      };
+    },
+    error: (
+      state,
+      {
+        payload: { debtorId, ...payload },
+      }: PayloadAction<
+        unknown & {
+          debtorId: number;
+        }
+      >
+    ) => {
+      state[getLenderDebtorMapKey(debtorId)] = {
+        ...state[getLenderDebtorMapKey(debtorId)],
+        isProcessing: false,
+        error: payload,
+      };
+    },
+    reset: (
+      state,
+      { payload: { debtorId } }: PayloadAction<{ debtorId: number }>
+    ) => {
+      state[getLenderDebtorMapKey(debtorId)] = {
+        isSuccess: false,
+        error: null,
+        isProcessing: false,
+      };
+    },
+  },
+});
+
 export const debtorsReducer = combineReducers({
   getDebtors: getDebtorsSlice.reducer,
+  getDebtorDebts: getDebtorDebtsSlice.reducer,
 });

@@ -9,7 +9,7 @@ import { Typography } from '@mui/material';
 import { AppLayout } from '@components/AppLayout';
 import { LocalizedLink } from '@components/LocalizedLink';
 import { FormData, PayTheDebtOffForm } from '@components/PayTheDebtOffForm';
-import { LenderDebtorDebtsListItemContainer } from '@containers/LenderDebtor/LenderDebtorDebtsListItemContainer';
+import { DebtorDebtsListItemContainer } from '@containers/DebtorDebts/DebtorDebtsListItemContainer';
 import { payTheDebtOffSlice } from '@ducks/debts/debts.slice';
 import { useOnSuccess } from '@common/hooks/useOnSuccess';
 import { useAppSelector } from '@common/hooks/useAppSelector';
@@ -61,10 +61,7 @@ export const PayTheDebtOffView = () => {
         isProcessing={false}
         isUploading={isUploading}
       >
-        <LenderDebtorDebtsListItemContainer
-          showPayButton={false}
-          debtId={+debtId}
-        />
+        <DebtorDebtsListItemContainer showPayButton={false} debtId={+debtId} />
       </PayTheDebtOffForm>
     </AppLayout>
   );

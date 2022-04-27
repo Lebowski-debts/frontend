@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { ROOT_ROUTES } from '@common/constants/routes';
 import { DebtorsView } from '@views/Debtors';
-import { LenderDebtorView } from '@views/LenderDebtor';
+import { DebtorDebtsView } from '@views/DebtorDebts';
 import { CreateDebtorDebtView } from '@views/CreateDebtorDebt';
 import { PayTheDebtOffView } from '@views/PayTheDebtOff';
 
@@ -30,8 +30,8 @@ export const AppRouter: React.FC<
         <DebtorsView />
       </Route>
 
-      <Route path={`${url}${ROOT_ROUTES.LENDER_DEBTOR_DEBTS}`} exact>
-        <LenderDebtorView />
+      <Route path={`${url}${ROOT_ROUTES.DEBTOR_DEBTS}`} exact>
+        <DebtorDebtsView />
       </Route>
 
       <Route path={`${url}${ROOT_ROUTES.CREATE_DEBTOR_DEBT}`} exact>
