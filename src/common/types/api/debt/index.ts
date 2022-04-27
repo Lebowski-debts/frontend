@@ -28,6 +28,6 @@ export interface ApiCreateDebt {
 }
 
 export interface ApiPayTheDebtOff {
-  isFullPayment: boolean;
+  isFullPayment?: boolean;
   paidSum: number;
 }

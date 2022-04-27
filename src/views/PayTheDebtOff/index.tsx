@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { ArrowBackIos } from '@mui/icons-material';
 import { Typography } from '@mui/material';
@@ -10,15 +11,31 @@ import { AppLayout } from '@components/AppLayout';
 import { LocalizedLink } from '@components/LocalizedLink';
 import { FormData, PayTheDebtOffForm } from '@components/PayTheDebtOffForm';
 import { LenderDebtorDebtsListItemContainer } from '@containers/LenderDebtor/LenderDebtorDebtsListItemContainer';
+import { payTheDebtOffSlice } from '@ducks/debts/debts.slice';
+import { useOnSuccess } from '@common/hooks/useOnSuccess';
+import { useAppSelector } from '@common/hooks/useAppSelector';
+import {
+  selectIsPayTheDebtOffUploading,
+  selectPayTheDebtOff,
+} from '@ducks/debts/debts.selectors';
 
 export const PayTheDebtOffView = () => {
   // TODO: fetch data for debt card in case if user reloads page
   const { t } = useTranslation();
   const { debtId } = useParams<{ debtId: string }>();
+  const payTheDebtOffState = useAppSelector(selectPayTheDebtOff);
+  const isUploading = useAppSelector(selectIsPayTheDebtOffUploading);
+
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const onSubmit = (data: FormData) => {
-    data.isFullPayment = false;
+    dispatch(payTheDebtOffSlice.actions.request({ data, debtId: +debtId }));
   };
+
+  useOnSuccess(() => {
+    history.push(ROOT_ROUTES.DEBTORS);
+  }, payTheDebtOffState);
 
   return (
     <AppLayout
@@ -39,7 +56,7 @@ export const PayTheDebtOffView = () => {
       <PayTheDebtOffForm
         onSubmit={onSubmit}
         isProcessing={false}
-        isUploading={false}
+        isUploading={isUploading}
       >
         <LenderDebtorDebtsListItemContainer
           showPayButton={false}

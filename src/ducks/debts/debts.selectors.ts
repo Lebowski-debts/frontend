@@ -9,3 +9,9 @@ export const selectCreateDebtState = (state: RootState) =>
 
 export const selectIsCreateDebtUploading = (state: RootState) =>
   isProcessing(selectCreateDebtState(state));
+
+export const selectPayTheDebtOff = (state: RootState) =>
+  state.debts.payTheDebtOff;
+
+export const selectIsPayTheDebtOffUploading = (state: RootState) =>
+  isProcessing(selectPayTheDebtOff(state));

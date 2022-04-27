@@ -8,7 +8,7 @@ import { Box, Grid, Paper, TextField, useTheme } from '@mui/material';
 import { ApiPayTheDebtOff } from '@common/types/api/debt';
 import { AbsoluteProgress } from '@components/AbsoluteProgress';
 
-export type FormData = Partial<ApiPayTheDebtOff>;
+export type FormData = Omit<ApiPayTheDebtOff, 'isFullPayment'>;
 
 export interface Props {
   isUploading?: boolean;

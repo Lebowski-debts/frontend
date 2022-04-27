@@ -5,7 +5,11 @@ import {
   DEFAULT_LIST_PARAMS,
 } from '@common/constants/api';
 import { PaginatedHttpSuccessResponse } from '@common/types/api';
-import { ApiCreateDebt, ApiGetDebtorDebts } from '@common/types/api/debt';
+import {
+  ApiCreateDebt,
+  ApiGetDebtorDebts,
+  ApiPayTheDebtOff,
+} from '@common/types/api/debt';
 import { ApiGetDebtor, ApiGetDebtorsParams } from '@common/types/api/debtor';
 
 export const debtorsApi = {
@@ -32,4 +36,7 @@ export const debtorsApi = {
 
   createDebtorDebt: (data: ApiCreateDebt) =>
     apiClient.post(API_ROUTES.DEBT, data),
+
+  payTheDebtOff: (debtId: number, data: ApiPayTheDebtOff) =>
+    apiClient.post(`${API_ROUTES.DEBT}/pay/${debtId}`, data),
 };
