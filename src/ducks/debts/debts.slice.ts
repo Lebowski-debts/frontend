@@ -16,7 +16,7 @@ export const debtsSlice = createSlice({
   initialState,
   reducers: {
     fill: (state, action: PayloadAction<NormalizedListValues<ApiGetDebt>>) => {
-      state.entities = action.payload;
+      state.entities = { ...state.entities, ...action.payload };
     },
   },
 });

@@ -11,7 +11,8 @@
     "debt_sum": "Сколько занимал",
     "debt_rest": "Сколько еще должен",
     "debt_expires_at": "Когда должен вернуть",
-    "pay_the_debt_off": "Погасить долг"
+    "pay_the_debt_off": "Погасить долг",
+    "debtor_has_no_debts": "Нет долгов"
   },
   "debt_form": {
     "create_new_debt": "Новый долг",

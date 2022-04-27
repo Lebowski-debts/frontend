@@ -7,27 +7,35 @@ import { AbsoluteProgress } from '@components/AbsoluteProgress';
 import { AsyncState } from '@common/store/helpers';
 import { ApiListParams, PaginatedHttpSuccessResponse } from '@common/types/api';
 import { LenderDebtorDebtsListItemContainer } from '@containers/LenderDebtor/LenderDebtorDebtsListItemContainer';
+import { InfiniteScrollLayout } from '@components/InfiniteScrollLayout';
 
 export interface Props
   extends AsyncState<PaginatedHttpSuccessResponse<number[]>, unknown> {
   getData: (params: ApiListParams) => void;
+  resetData: () => void;
 }
 
 export const LenderDebtorDebtsList: React.FC<Props> = ({
   getData,
-  isProcessing,
+  resetData,
+  isProcessing = false,
   value,
 }) => {
-  const { data = [] } = value || {};
+  const { data = [], pagesCount, currentPage } = value || {};
   const { t } = useTranslation();
 
   useEffect(() => {
     getData({ page: 1 });
+
+    return () => resetData();
   }, []);
 
   return (
-    <Grid
-      container
+    <InfiniteScrollLayout
+      pagesCount={pagesCount || 0}
+      bottomPositionOffset={248}
+      getData={getData}
+      isProcessing={!!(isProcessing && currentPage)}
       justifyContent="center"
       height="100%"
       width="100%"
@@ -35,9 +43,9 @@ export const LenderDebtorDebtsList: React.FC<Props> = ({
       padding="14px 14px"
       overflow="auto"
     >
-      {isProcessing && <AbsoluteProgress />}
+      {isProcessing && !currentPage && <AbsoluteProgress />}
 
-      {data.length ? (
+      {!!data.length &&
         data.map((id, index) => (
           <Grid
             item
@@ -51,14 +59,15 @@ export const LenderDebtorDebtsList: React.FC<Props> = ({
               debtId={id}
             />
           </Grid>
-        ))
-      ) : (
+        ))}
+
+      {!isProcessing && !data.length && (
         <Grid item margin="auto">
           <Typography fontSize={24}>
             {t('debtors.debtor_has_no_debts')}
           </Typography>
         </Grid>
       )}
-    </Grid>
+    </InfiniteScrollLayout>
   );
 };

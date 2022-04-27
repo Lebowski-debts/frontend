@@ -38,7 +38,16 @@ export const getLenderDebtorDebtsSlice = createSlice({
         ...state[getLenderDebtorMapKey(lenderId, debtorId)],
         isProcessing: false,
         error: null,
-        value: payload,
+        value: {
+          ...payload,
+          data: Array.from(
+            new Set([
+              ...(state[getLenderDebtorMapKey(lenderId, debtorId)].value
+                ?.data || []),
+              ...payload.data,
+            ])
+          ),
+        },
       };
     },
     error: (
@@ -56,6 +65,18 @@ export const getLenderDebtorDebtsSlice = createSlice({
         ...state[getLenderDebtorMapKey(lenderId, debtorId)],
         isProcessing: false,
         error: payload,
+      };
+    },
+    reset: (
+      state,
+      {
+        payload: { debtorId, lenderId },
+      }: PayloadAction<{ debtorId: number; lenderId: number }>
+    ) => {
+      state[getLenderDebtorMapKey(lenderId, debtorId)] = {
+        isSuccess: false,
+        error: null,
+        isProcessing: false,
       };
     },
   },

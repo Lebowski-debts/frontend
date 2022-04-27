@@ -32,6 +32,8 @@ const mapDispatchToProps = (
         ...params,
       })
     ),
+  resetData: () =>
+    dispatch(getLenderDebtorDebtsSlice.actions.reset({ debtorId, lenderId })),
 });
 
 export const LenderDebtorDebtsListContainer = connect(

@@ -6,20 +6,33 @@ import { Grid, Typography } from '@mui/material';
 import { AbsoluteProgress } from '@components/AbsoluteProgress';
 import { GetDebtorsPayload } from '@ducks/debtors/debtors.types';
 import { DebtorsListItemContainer } from '@containers/Debtors/DebtorsListItemContainer';
+import { InfiniteScrollLayout } from '@components/InfiniteScrollLayout';
+import {
+  NormalizedList,
+  PaginatedHttpSuccessResponse,
+} from '@common/types/api';
+import { ApiGetDebtorDebtsCommonInfo } from '@common/types/api/debtor';
+import { AsyncState } from '@common/store/helpers';
 
 const myTelegramUserId = +(process.env.TELEGRAM_USER_ID || 0);
-export interface Props {
-  ids?: number[];
+export interface Props
+  extends AsyncState<
+    PaginatedHttpSuccessResponse<
+      NormalizedList<ApiGetDebtorDebtsCommonInfo, number>
+    >,
+    unknown
+  > {
   getData: (payload: GetDebtorsPayload) => void;
-  isProcessing: boolean;
 }
 
 export const DebtorsList: React.FC<Props> = ({
-  ids = [],
   getData,
-  isProcessing,
+  isProcessing = false,
+  value,
 }) => {
   const { t } = useTranslation();
+
+  const { data, currentPage, pagesCount } = value || {};
 
   useEffect(() => {
     getData({
@@ -30,8 +43,12 @@ export const DebtorsList: React.FC<Props> = ({
   }, []);
 
   return (
-    <Grid
-      container
+    <InfiniteScrollLayout
+      isProcessing={!!currentPage && isProcessing}
+      getData={(apiListParams) =>
+        getData({ ...apiListParams, userId: myTelegramUserId })
+      }
+      pagesCount={pagesCount || 0}
       justifyContent="center"
       height="100%"
       width="100%"
@@ -39,27 +56,28 @@ export const DebtorsList: React.FC<Props> = ({
       padding="14px 14px"
       overflow="auto"
     >
-      {isProcessing && <AbsoluteProgress />}
+      {isProcessing && !currentPage && <AbsoluteProgress />}
 
-      {ids.length ? (
-        ids.map((id, index) => (
+      {!!data?.keys.length &&
+        data?.keys.map((id, index) => (
           <Grid
             item
             key={id}
             xs={12}
-            marginBottom={index === ids.length - 1 ? 0 : 20}
+            marginBottom={index === data?.keys.length - 1 ? 0 : 20}
           >
             <DebtorsListItemContainer
               lenderId={myTelegramUserId}
               debtorId={id}
             />
           </Grid>
-        ))
-      ) : (
+        ))}
+
+      {!data?.keys.length && !isProcessing && (
         <Grid item margin="auto">
           <Typography fontSize={24}>{t('debtors.no_debtors_yet')}</Typography>
         </Grid>
       )}
-    </Grid>
+    </InfiniteScrollLayout>
   );
 };

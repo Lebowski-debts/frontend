@@ -5,7 +5,6 @@ import {
   CircularProgressProps,
   Grid,
   GridProps,
-  useTheme,
 } from '@mui/material';
 
 export interface Props extends CircularProgressProps {
@@ -16,8 +15,6 @@ export const AbsoluteProgress: React.FC<Props> = ({
   containerGridProps = {},
   ...props
 }) => {
-  const theme = useTheme();
-
   return (
     <Grid
       position="absolute"
@@ -25,14 +22,13 @@ export const AbsoluteProgress: React.FC<Props> = ({
       alignContent="center"
       height="100%"
       width="100%"
+      left={0}
+      top={0}
       container
       {...containerGridProps}
       sx={{ backdropFilter: 'blur(5px)', zIndex: 1, ...containerGridProps.sx }}
     >
-      <CircularProgress
-        {...props}
-        sx={{ color: theme.palette.primary.dark, ...props.sx }}
-      />
+      <CircularProgress {...props} sx={{ color: 'white', ...props.sx }} />
     </Grid>
   );
 };
