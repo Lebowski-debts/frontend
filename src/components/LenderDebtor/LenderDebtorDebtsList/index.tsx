@@ -32,7 +32,7 @@ export const LenderDebtorDebtsList: React.FC<Props> = ({
 
   return (
     <InfiniteScrollLayout
-      pagesCount={pagesCount || 0}
+      pagesCount={pagesCount || 1}
       bottomPositionOffset={248}
       getData={getData}
       isProcessing={!!(isProcessing && currentPage)}

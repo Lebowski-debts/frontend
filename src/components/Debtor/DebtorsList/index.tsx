@@ -23,10 +23,12 @@ export interface Props
     unknown
   > {
   getData: (payload: GetDebtorsPayload) => void;
+  resetData: () => void;
 }
 
 export const DebtorsList: React.FC<Props> = ({
   getData,
+  resetData,
   isProcessing = false,
   value,
 }) => {
@@ -40,15 +42,17 @@ export const DebtorsList: React.FC<Props> = ({
       page: 1,
       onPage: 5,
     });
+
+    return () => resetData();
   }, []);
 
   return (
     <InfiniteScrollLayout
-      isProcessing={!!currentPage && isProcessing}
+      isProcessing={isProcessing || !!currentPage}
       getData={(apiListParams) =>
         getData({ ...apiListParams, userId: myTelegramUserId })
       }
-      pagesCount={pagesCount || 0}
+      pagesCount={pagesCount || 1}
       justifyContent="center"
       height="100%"
       width="100%"

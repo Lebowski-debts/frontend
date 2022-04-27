@@ -9,6 +9,7 @@ const mapStateToProps = (state: RootState) => selectGetDebtors(state) || {};
 
 const mapDispatchToProps = {
   getData: getDebtorsSlice.actions.request,
+  resetData: getDebtorsSlice.actions.reset,
 };
 
 export const DebtorsListContainer = connect(
