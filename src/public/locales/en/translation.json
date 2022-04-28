@@ -12,7 +12,10 @@
     "debt_sum": "Debt sum",
     "debt_rest": "To return",
     "debt_expires_at": "Should return until",
-    "pay_the_debt_off": "Pay the debt off"
+    "pay_the_debt_off": "Pay the debt off",
+    "see_profile": "See profile",
+    "filters": "Filters",
+    "sorting": "Sorting"
   },
   "debt_form": {
     "create_new_debt": "Create new debt",

@@ -12,7 +12,10 @@
     "debt_rest": "Сколько еще должен",
     "debt_expires_at": "Когда должен вернуть",
     "pay_the_debt_off": "Погасить долг",
-    "debtor_has_no_debts": "Нет долгов"
+    "debtor_has_no_debts": "Нет долгов",
+    "see_profile": "Просмотреть профиль",
+    "filters": "Фильтрация",
+    "sorting": "Сортировка"
   },
   "debt_form": {
     "create_new_debt": "Новый долг",

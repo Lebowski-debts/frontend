@@ -13,16 +13,22 @@ export interface Props {
 export const AppLayout: React.FC<Props> = ({
   children = null,
   headerProps = {},
-  layoutBoxProps = {},
   contentBoxProps = {},
 }) => {
   return (
-    <Box height="100%" {...layoutBoxProps}>
+    <>
       <AppHeader {...headerProps} />
 
-      <Box {...contentBoxProps} height="calc(100% - 60px)">
+      <Box
+        {...contentBoxProps}
+        sx={{
+          marginTop: (theme) => theme.mixins.toolbar.minHeight,
+          height: (theme) =>
+            `calc(100% - ${theme.mixins.toolbar.minHeight || 0}px)`,
+        }}
+      >
         {children}
       </Box>
-    </Box>
+    </>
   );
 };

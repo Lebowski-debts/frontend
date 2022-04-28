@@ -1,36 +1,40 @@
 import React from 'react';
 
-import { Box, BoxProps, useTheme } from '@mui/material';
+import { AppBar, AppBarProps, Toolbar, ToolbarProps } from '@mui/material';
 
-export interface Props {
+export interface Props extends AppBarProps {
   leftButton?: React.ReactNode;
   rightButton?: React.ReactNode;
-  boxProps?: BoxProps;
+  toolbarProps?: ToolbarProps;
 }
 
 export const AppHeader: React.FC<Props> = ({
   leftButton = null,
   rightButton = null,
   children = null,
-  boxProps = {},
+  toolbarProps = {},
+  ...appBarProps
 }) => {
-  const { palette } = useTheme();
-
   return (
-    <Box
-      display="flex"
-      justifyContent="space-between"
-      alignItems="center"
-      width="100%"
-      height={60}
-      bgcolor={palette.primary.main}
-      color={palette.secondary.main}
-      padding="0 14px"
-      {...boxProps}
+    <AppBar
+      position="fixed"
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      {...appBarProps}
     >
-      {leftButton}
-      {children}
-      {rightButton}
-    </Box>
+      <Toolbar
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '0 14px',
+          ...toolbarProps?.sx,
+        }}
+        {...toolbarProps}
+      >
+        {leftButton}
+        {children}
+        {rightButton}
+      </Toolbar>
+    </AppBar>
   );
 };

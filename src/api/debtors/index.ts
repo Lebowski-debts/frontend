@@ -2,7 +2,7 @@ import { apiClient } from '@api';
 import {
   API_ROUTES,
   DEFAULT_DEBTORS_LIST_PARAMS,
-  DEFAULT_LIST_PARAMS,
+  DEFAULT_DEBTS_LIST_PARAMS,
 } from '@common/constants/api';
 import { PaginatedHttpSuccessResponse } from '@common/types/api';
 import {
@@ -29,7 +29,7 @@ export const debtorsApi = {
     return apiClient.get<ApiGetDebtorDebts>(
       `${API_ROUTES.DEBT}/debts/from/${fromId}/to/${toId}`,
       {
-        params: { ...DEFAULT_LIST_PARAMS, ...params },
+        params: { ...DEFAULT_DEBTS_LIST_PARAMS, ...params },
       }
     );
   },

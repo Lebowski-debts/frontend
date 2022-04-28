@@ -43,7 +43,7 @@ export const App = () => {
   return (
     <I18nextProvider i18n={i18n}>
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme} key="app">
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <CssBaseline />
             <RootRouter />
