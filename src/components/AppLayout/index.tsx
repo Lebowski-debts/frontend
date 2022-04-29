@@ -1,30 +1,35 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
-import { Box, BoxProps } from '@mui/material';
+import { Box, BoxProps, Theme } from '@mui/material';
 
-import { AppHeader, Props as HeaderProps } from '@components/AppHeader';
-
-export interface Props {
-  headerProps?: HeaderProps & { children?: React.ReactNode };
-  layoutBoxProps?: BoxProps;
+export interface Props extends BoxProps {
+  header?: React.ReactNode;
   contentBoxProps?: BoxProps;
 }
 
 export const AppLayout: React.FC<Props> = ({
   children = null,
-  headerProps = {},
-  contentBoxProps = {},
+  header = null,
+  ...contentBoxProps
 }) => {
+  const headerRef = useRef<HTMLDivElement>();
+  const defaultStyles = headerRef.current?.innerHTML
+    ? {
+        marginTop: (theme: Theme) => theme.mixins.toolbar.minHeight,
+        height: (theme: Theme) =>
+          `calc(100% - ${theme.mixins.toolbar.minHeight || 0}px)`,
+      }
+    : {};
+
   return (
     <>
-      <AppHeader {...headerProps} />
+      <Box ref={headerRef}>{header}</Box>
 
       <Box
         {...contentBoxProps}
         sx={{
-          marginTop: (theme) => theme.mixins.toolbar.minHeight,
-          height: (theme) =>
-            `calc(100% - ${theme.mixins.toolbar.minHeight || 0}px)`,
+          ...defaultStyles,
+          ...contentBoxProps.sx,
         }}
       >
         {children}

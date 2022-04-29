@@ -7,7 +7,9 @@ export const RootRouter = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/:locale" component={AppRouter} />
+        <Route path="/:locale">
+          <AppRouter />
+        </Route>
 
         <Route>
           <Redirect to="/en" />

@@ -1,46 +1,25 @@
 import React, { useEffect } from 'react';
-import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
-import { StaticContext } from 'react-router';
+import { useRouteMatch } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { ROOT_ROUTES } from '@common/constants/routes';
-import { DebtorsView } from '@views/Debtors';
-import { DebtorDebtsView } from '@views/DebtorDebts';
-import { CreateDebtorDebtView } from '@views/CreateDebtorDebt';
-import { PayTheDebtOffView } from '@views/PayTheDebtOff';
+import { AppLayout } from '@components/AppLayout';
+import { ContentRouter } from '@routers/ContentRouter';
+import { HeaderRouter } from '@routers/HeaderRouter';
 
-export const AppRouter: React.FC<
-  RouteComponentProps<any, StaticContext, unknown>
-> = (props) => {
-  const { match } = props;
-  const { url, params } = match as { url: string; params: { locale: string } };
+export const AppRouter: React.FC = () => {
+  const match = useRouteMatch<{ locale: string }>();
+  const {
+    params: { locale },
+  } = match;
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    i18n.changeLanguage(params.locale);
-  }, [params.locale]);
+    i18n.changeLanguage(locale);
+  }, [locale]);
 
   return (
-    <Switch>
-      <Route path={`${url}${ROOT_ROUTES.HOME}`} exact>
-        <Redirect to={`${url}${ROOT_ROUTES.DEBTORS}`} />
-      </Route>
-
-      <Route path={`${url}${ROOT_ROUTES.DEBTORS}`} exact>
-        <DebtorsView />
-      </Route>
-
-      <Route path={`${url}${ROOT_ROUTES.DEBTOR_DEBTS}`} exact>
-        <DebtorDebtsView />
-      </Route>
-
-      <Route path={`${url}${ROOT_ROUTES.CREATE_DEBTOR_DEBT}`} exact>
-        <CreateDebtorDebtView />
-      </Route>
-
-      <Route path={`${url}${ROOT_ROUTES.PAY_THE_DEBT_OFF}`} exact>
-        <PayTheDebtOffView />
-      </Route>
-    </Switch>
+    <AppLayout header={<HeaderRouter />}>
+      <ContentRouter />
+    </AppLayout>
   );
 };
