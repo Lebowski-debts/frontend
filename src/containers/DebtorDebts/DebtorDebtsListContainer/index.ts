@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import { Dispatch } from 'redux';
 
-import { DebtorDebtsList } from '@components/DebtorDebts/DebtorDebtsList';
+import { DebtorDebtsList } from '@widgets/DebtorDebts/DebtorDebtsList';
 import { RootState } from '@store';
 import { ApiListParams } from '@common/types/api';
 import { selectDebtorDebts } from '@ducks/debtors/debtors.selectors';

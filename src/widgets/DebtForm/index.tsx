@@ -9,7 +9,7 @@ import { LoadingButton } from '@mui/lab';
 
 import { ApiCreateDebt } from '@common/types/api/debt';
 import { AbsoluteProgress } from '@components/AbsoluteProgress';
-import { UsersAutoComplete } from '@components/UsersAutoComplete';
+import { UsersAutoComplete } from '@widgets/UsersAutoComplete';
 
 export type FormData = Omit<Omit<ApiCreateDebt, 'lenderId'>, 'debtorId'> & {
   debtorId: null | number;

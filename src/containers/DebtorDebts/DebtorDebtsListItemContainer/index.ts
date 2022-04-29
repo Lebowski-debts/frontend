@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { DebtorDebtsListItem } from '@components/DebtorDebts/DebtorDebtsListItem';
+import { DebtorDebtsListItem } from '@widgets/DebtorDebts/DebtorDebtsListItem';
 import { selectDebtById } from '@ducks/debts/debts.selectors';
 import { RootState } from '@store';
 

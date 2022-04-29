@@ -8,7 +8,7 @@ import { Typography } from '@mui/material';
 
 import { AppLayout } from '@components/AppLayout';
 import { LocalizedLink } from '@components/LocalizedLink';
-import { FormData, PayTheDebtOffForm } from '@components/PayTheDebtOffForm';
+import { FormData, PayTheDebtOffForm } from '@widgets/PayTheDebtOffForm';
 import { DebtorDebtsListItemContainer } from '@containers/DebtorDebts/DebtorDebtsListItemContainer';
 import { payTheDebtOffSlice } from '@ducks/debts/debts.slice';
 import { useOnSuccess } from '@common/hooks/useOnSuccess';

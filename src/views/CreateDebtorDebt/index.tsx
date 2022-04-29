@@ -9,7 +9,7 @@ import { ArrowBackIos } from '@mui/icons-material';
 
 import { useAppSelector } from '@common/hooks/useAppSelector';
 import { ApiCreateDebt } from '@common/types/api/debt';
-import { DebtForm, FormData } from '@components/DebtForm';
+import { DebtForm, FormData } from '@widgets/DebtForm';
 import {
   selectCreateDebtState,
   selectIsCreateDebtUploading,

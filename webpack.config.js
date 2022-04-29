@@ -77,6 +77,7 @@ module.exports = (env) => {
         '@routers': resolvePath('./src/routers'),
         '@store': resolvePath('./src/store'),
         '@views': resolvePath('./src/views'),
+        '@widgets': resolvePath('./src/widgets'),
       }
     },
 
