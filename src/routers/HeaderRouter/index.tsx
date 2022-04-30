@@ -3,6 +3,8 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
 import { ROOT_ROUTES } from '@common/constants/routes';
 import { DebtorDebtsHeader } from '@widgets/Headers/DebtorDebtsHeader';
+import { CreateDebtorDebtHeader } from '@widgets/Headers/CreateDebtorDebtHeader';
+import { PayTheDebtOffHeader } from '@widgets/Headers/PayTheDebtOffHeader';
 
 export const HeaderRouter: React.FC = () => {
   const { url: locale } = useRouteMatch();
@@ -11,6 +13,14 @@ export const HeaderRouter: React.FC = () => {
     <Switch>
       <Route path={`${locale}${ROOT_ROUTES.DEBTOR_DEBTS}`}>
         <DebtorDebtsHeader />
+      </Route>
+
+      <Route path={`${locale}${ROOT_ROUTES.CREATE_DEBTOR_DEBT}`}>
+        <CreateDebtorDebtHeader />
+      </Route>
+
+      <Route path={`${locale}${ROOT_ROUTES.PAY_THE_DEBT_OFF}`}>
+        <PayTheDebtOffHeader />
       </Route>
     </Switch>
   );
