@@ -10,7 +10,7 @@ export const ROOT_ROUTES = {
   },
 
   getDebtorDebtsRoute: (debtorId: number) =>
-    `${ROOT_ROUTES.DEBTORS}/debtorId/${debtorId}${ROOT_ROUTES.DEBTS}`,
+    `${ROOT_ROUTES.DEBTORS}/debtorId/${debtorId}${ROOT_ROUTES.DEBTS}?status=NEW,IN_PROGRESS`,
 
   get CREATE_DEBTOR_DEBT() {
     return `${this.DEBTORS}/debtorId/:debtorId/new-debt`;
@@ -27,4 +27,6 @@ export const ROOT_ROUTES = {
     `${ROOT_ROUTES.DEBTORS}/debtorId/${debtorId}/pay-the-debt-off/${debtId}`,
 
   USERS: '/users',
+
+  getUserRoute: (userId: number) => `${ROOT_ROUTES.USERS}/${userId}`,
 };

@@ -12,12 +12,14 @@ export interface Props extends BoxProps {
   getData: (paginationData: ApiListParams) => void;
   bottomPositionOffset?: number;
   withProgressBar?: boolean;
+  getDataDeps?: any[];
 }
 
 export const InfiniteScrollLayout: React.FC<Props> = ({
   children,
   isProcessing,
   getData,
+  getDataDeps = [],
   initialPage = 1,
   onPage,
   pagesCount,
@@ -28,10 +30,8 @@ export const InfiniteScrollLayout: React.FC<Props> = ({
   const [page, setPage] = useState(initialPage);
 
   useEffect(() => {
-    if (page < 2) return;
-
     getData({ page });
-  }, [page]);
+  }, [page, ...(getDataDeps as string[])]);
 
   const onScroll: React.UIEventHandler<HTMLDivElement> = ({
     target: _target,

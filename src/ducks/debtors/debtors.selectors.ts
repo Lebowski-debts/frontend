@@ -15,18 +15,23 @@ export const selectDebtorsListIds = (state: RootState) =>
 export const selectGetDebtorsIsProcessing = (state: RootState) =>
   isProcessing(selectGetDebtors(state));
 
-export const selectDebtorDebts = (state: RootState, lenderDebtorKey: string) =>
-  state.debtors.getDebtorDebts[lenderDebtorKey];
+export const selectGetDebtorDebts = (
+  state: RootState,
+  lenderDebtorKey: string
+) => state.debtors.getDebtorDebts[lenderDebtorKey];
 
 export const selectLenderDebtorDebtsData = (
   state: RootState,
   lenderDebtorKey: string
-) => selectDebtorDebts(state, lenderDebtorKey).value;
+) => selectGetDebtorDebts(state, lenderDebtorKey).value;
 
 export const selectLenderDebtorDebtsIsProcessing = (
   state: RootState,
   lenderDebtorKey: string
 ) =>
   isProcessing(
-    selectDebtorDebts(state, lenderDebtorKey) as _AsyncState<unknown, unknown>
+    selectGetDebtorDebts(state, lenderDebtorKey) as _AsyncState<
+      unknown,
+      unknown
+    >
   );

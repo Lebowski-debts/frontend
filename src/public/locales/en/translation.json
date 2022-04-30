@@ -17,6 +17,15 @@
     "filters": "Filters",
     "sorting": "Sorting"
   },
+  "debts_filter": {
+    "status": "Payment status",
+    "expiration_date": "Expires at"
+  },
+  "debt_status": {
+    "new": "New",
+    "in_progress": "In progress",
+    "paid": "Paid"
+  },
   "debt_form": {
     "create_new_debt": "Create new debt",
     "edit_debt": "Edit debt",
@@ -32,7 +41,9 @@
   "common": {
     "details": "Details",
     "submit": "Submit",
-    "loading": "Loading"
+    "loading": "Loading",
+    "cancel": "Cancel",
+    "back": "Back"
   },
   "errors": {
     "required_field": "This field is required"

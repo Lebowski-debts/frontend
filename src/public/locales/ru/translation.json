@@ -17,6 +17,15 @@
     "filters": "Фильтрация",
     "sorting": "Сортировка"
   },
+  "debts_filter": {
+    "status": "Статус долга",
+    "expiration_date": "Должен отдать до"
+  },
+  "debt_status": {
+    "new": "Новый",
+    "in_progress": "В процессе",
+    "paid": "Погашенный"
+  },
   "debt_form": {
     "create_new_debt": "Новый долг",
     "edit_debt": "Редактировать долг",
@@ -32,7 +41,9 @@
   "common": {
     "details": "Подробнее",
     "submit": "Подтвердить",
-    "loading": "Загрузка"
+    "loading": "Загрузка",
+    "cancel": "Закрыть",
+    "back": "Назад"
   },
   "errors": {
     "required_field": "Это поле обязательное"

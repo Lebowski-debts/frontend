@@ -1,24 +1,24 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from 'react';
 
-import {
-  AccountCircle,
-  ArrowForwardIos,
-  FilterAlt,
-  Sort,
-} from '@mui/icons-material';
-import {
-  Drawer,
-  DrawerProps,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from '@mui/material';
+import { Drawer, DrawerProps } from '@mui/material';
+
+import { DebtorDebtsDrawerMain } from './Main';
+import { TabName } from './types';
+import { DebtorDebtsDrawerFilter } from './Filter';
 
 export const DebtorDebtsDrawer = (props: DrawerProps) => {
-  const { t } = useTranslation();
+  const [tab, setTab] = useState<TabName | ''>('');
+
+  const onClose = () => {
+    if (props.onClose) {
+      props.onClose({}, 'backdropClick');
+    }
+
+    setTimeout(() => {
+      setTab('');
+    }, 400);
+  };
+
   return (
     <Drawer
       container={() => document.getElementById('root')}
@@ -33,42 +33,16 @@ export const DebtorDebtsDrawer = (props: DrawerProps) => {
         },
       }}
       {...props}
+      onClose={onClose}
     >
-      <List>
-        <ListItem>
-          <ListItemButton>
-            <ListItemIcon>
-              <AccountCircle />
-            </ListItemIcon>
+      {!tab && <DebtorDebtsDrawerMain navigateToTab={setTab} />}
 
-            <ListItemText primary={t('debts.see_profile')} />
-          </ListItemButton>
-        </ListItem>
-
-        <ListItem>
-          <ListItemButton>
-            <ListItemIcon>
-              <FilterAlt />
-            </ListItemIcon>
-
-            <ListItemText primary={t('debts.filters')} />
-
-            <ArrowForwardIos fontSize="small" />
-          </ListItemButton>
-        </ListItem>
-
-        <ListItem>
-          <ListItemButton>
-            <ListItemIcon>
-              <Sort />
-            </ListItemIcon>
-
-            <ListItemText primary={t('debts.sorting')} />
-
-            <ArrowForwardIos fontSize="small" />
-          </ListItemButton>
-        </ListItem>
-      </List>
+      {tab === 'FILTERS' && (
+        <DebtorDebtsDrawerFilter
+          onCloseDrawer={onClose}
+          onClose={() => setTab('')}
+        />
+      )}
     </Drawer>
   );
 };

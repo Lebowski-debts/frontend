@@ -62,6 +62,7 @@ export const DebtorDebtsHeader = () => {
           </Box>
         </Box>
       </AppHeader>
+
       <DebtorDebtsDrawer
         open={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}

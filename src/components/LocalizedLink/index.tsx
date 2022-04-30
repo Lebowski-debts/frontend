@@ -10,13 +10,12 @@ export const LocalizedLink: React.FC<LinkProps> = ({ to, ...props }) => {
   } = useTranslation();
 
   const { palette } = useTheme();
-  const { pathname, search } = useLocation();
+  const { pathname } = useLocation();
 
   const url = `/${language}${to.toString()}`;
 
-  const params = new URLSearchParams(search);
+  const params = new URLSearchParams(url);
   params.set('prevRoute', pathname.replace(`/${language}`, ''));
-
   const searchString = `?${params.toString()}`;
 
   return (

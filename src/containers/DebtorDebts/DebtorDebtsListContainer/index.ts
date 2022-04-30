@@ -5,7 +5,7 @@ import { Dispatch } from 'redux';
 import { DebtorDebtsList } from '@widgets/DebtorDebts/DebtorDebtsList';
 import { RootState } from '@store';
 import { ApiListParams } from '@common/types/api';
-import { selectDebtorDebts } from '@ducks/debtors/debtors.selectors';
+import { selectGetDebtorDebts } from '@ducks/debtors/debtors.selectors';
 import {
   getDebtorDebtsSlice,
   getLenderDebtorMapKey,
@@ -16,7 +16,7 @@ export interface OwnProps {
 }
 
 const mapStateToProps = (state: RootState, { debtorId }: OwnProps) =>
-  selectDebtorDebts(state, getLenderDebtorMapKey(debtorId)) || {};
+  selectGetDebtorDebts(state, getLenderDebtorMapKey(debtorId)) || {};
 
 const mapDispatchToProps = (dispatch: Dispatch, { debtorId }: OwnProps) => ({
   getData: (params: ApiListParams) =>

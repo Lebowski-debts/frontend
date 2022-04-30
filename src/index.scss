@@ -4,3 +4,7 @@
   width: 100vw;
   overflow: auto;
 }
+
+*[class^="Mui"] {
+  background-image: none !important;
+}
