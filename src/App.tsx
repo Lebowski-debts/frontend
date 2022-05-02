@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 
+import { LicenseInfo } from '@mui/x-license-pro';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -14,6 +15,7 @@ import { RootRouter } from './routers';
 import { store } from './store';
 import './index.scss';
 
+LicenseInfo.setLicenseKey('');
 sagaMiddleware.run(sagas);
 
 const theme = createTheme({

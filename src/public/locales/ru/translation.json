@@ -20,7 +20,9 @@
   },
   "debts_filter": {
     "status": "Статус долга",
-    "expiration_date": "Должен отдать до"
+    "expiration_date": "Должен отдать до",
+    "expiration_from": "Истекает начиная с",
+    "expiration_to": "Истекает заканчивая"
   },
   "debt_status": {
     "new": "Новый",

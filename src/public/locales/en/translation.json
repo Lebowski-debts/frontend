@@ -20,7 +20,9 @@
   },
   "debts_filter": {
     "status": "Payment status",
-    "expiration_date": "Expires at"
+    "expiration_date": "Expires at",
+    "expiration_from": "Expiration from",
+    "expiration_to": "Expiration to"
   },
   "debt_status": {
     "new": "New",
