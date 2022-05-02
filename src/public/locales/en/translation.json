@@ -22,7 +22,9 @@
     "status": "Payment status",
     "expiration_date": "Expires at",
     "expiration_from": "Expiration from",
-    "expiration_to": "Expiration to"
+    "expiration_to": "Expiration to",
+    "expiration_status": "Expiration status",
+    "expiration_status_placeholder": "Select expiration status"
   },
   "debt_status": {
     "new": "New",
@@ -50,5 +52,9 @@
   },
   "errors": {
     "required_field": "This field is required"
+  },
+  "expiration_status": {
+    "expired": "Expired",
+    "not_expired": "Not expired"
   }
 }

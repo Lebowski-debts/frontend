@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Box, Button, Chip, TextField, Typography } from '@mui/material';
 import {
-  DateRangePicker,
-  DateRange,
-} from '@mui/x-date-pickers-pro/DateRangePicker';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { Dayjs } from 'dayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers-pro';
+  Box,
+  Button,
+  Chip,
+  MenuItem,
+  Select,
+  // TextField,
+  Typography,
+} from '@mui/material';
+// import {
+//   DateRangePicker,
+//   DateRange,
+// } from '@mui/x-date-pickers-pro/DateRangePicker';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { Dayjs } from 'dayjs';
+// import { LocalizationProvider } from '@mui/x-date-pickers-pro';
 
 import { PaymentStatus } from '@common/types/api/debtor';
 import { useSearchParams } from '@common/hooks/useSearchParams';
+import { EXPIRATION_STATUSES } from '@common/constants/api';
 
 export interface Props {
   onClose: () => void;
@@ -21,31 +30,40 @@ export interface Props {
 export const DebtorDebtsDrawerFilter = ({ onClose, onCloseDrawer }: Props) => {
   const { t } = useTranslation();
   const { getParam, updateParam } = useSearchParams();
-  const initialStatuses = getParam('status').split(',') as PaymentStatus[];
-  const [statuses, setStatuses] = useState<PaymentStatus[]>(initialStatuses);
-  const [dates, setDates] = useState<DateRange<Dayjs>>([null, null]);
-  const [expirationFrom, expirationTo] = dates;
+  const initialExpirationStatus = getParam('expirationStatus');
+  const initialStatuses = getParam('paymentStatuses').split(
+    ','
+  ) as PaymentStatus[];
+  const [paymentStatuses, setPaymentStatuses] =
+    useState<PaymentStatus[]>(initialStatuses);
+  // const [dates, setDates] = useState<DateRange<Dayjs>>([null, null]);
+  // const [expirationFrom, expirationTo] = dates;
+  const [expirationStatus, setExpirationStatus] = useState(
+    initialExpirationStatus
+  );
 
   const onSubmit = () => {
-    updateParam('status', statuses.join(','));
-    updateParam('expirationFrom', expirationFrom?.toISOString() || '');
-    updateParam('expirationTo', expirationTo?.toISOString() || '');
+    updateParam('paymentStatuses', paymentStatuses.join(','));
+    updateParam('expirationStatus', expirationStatus);
+    // updateParam('expirationFrom', expirationFrom?.toISOString() || '');
+    // updateParam('expirationTo', expirationTo?.toISOString() || '');
 
     onCloseDrawer();
   };
 
-  const isSelected = (status: PaymentStatus) => statuses.includes(status);
+  const isSelected = (status: PaymentStatus) =>
+    paymentStatuses.includes(status);
 
   const toggleStatus = (status: PaymentStatus) => {
     if (isSelected(status)) {
-      setStatuses((actualStatuses) =>
+      setPaymentStatuses((actualStatuses) =>
         actualStatuses.filter((item) => item !== status)
       );
 
       return;
     }
 
-    setStatuses((actualStatuses) => [...actualStatuses, status]);
+    setPaymentStatuses((actualStatuses) => [...actualStatuses, status]);
   };
 
   return (
@@ -68,7 +86,7 @@ export const DebtorDebtsDrawerFilter = ({ onClose, onCloseDrawer }: Props) => {
         </Box>
       </Box>
 
-      <Box marginBottom={20}>
+      {/* <Box marginBottom={40}>
         <Typography fontSize={16} marginBottom={10}>
           {t('debts_filter.expiration_date')}
         </Typography>
@@ -89,6 +107,26 @@ export const DebtorDebtsDrawerFilter = ({ onClose, onCloseDrawer }: Props) => {
             )}
           />
         </LocalizationProvider>
+      </Box> */}
+
+      <Box marginBottom={20}>
+        <Typography fontSize={16} marginBottom={10}>
+          {t('debts_filter.expiration_status')}
+        </Typography>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          label={t('debts_filter.expiration_status_placeholder')}
+          fullWidth
+          onChange={(e) => setExpirationStatus(e.target.value)}
+          value={expirationStatus}
+        >
+          {EXPIRATION_STATUSES.map((status) => (
+            <MenuItem key={status} value={status}>
+              {t(`expiration_status.${status.toLowerCase()}`)}
+            </MenuItem>
+          ))}
+        </Select>
       </Box>
 
       <Button

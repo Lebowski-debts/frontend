@@ -18,3 +18,5 @@ export const DEFAULT_DEBTORS_LIST_PARAMS = {
   orderField: 'lastDebtDate',
   paymentStatusList: 'NEW,IN_PROGRESS',
 };
+
+export const EXPIRATION_STATUSES = ['EXPIRED', 'NOT_EXPIRED'];

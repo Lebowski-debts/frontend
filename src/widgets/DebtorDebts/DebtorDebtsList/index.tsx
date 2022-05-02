@@ -8,7 +8,11 @@ import { AsyncState } from '@common/store/helpers';
 import { PaginatedHttpSuccessResponse } from '@common/types/api';
 import { InfiniteScrollLayout } from '@components/InfiniteScrollLayout';
 import { DebtorDebtsListItemContainer } from '@containers/DebtorDebts/DebtorDebtsListItemContainer';
-import { ApiGetDebtorsParams, PaymentStatus } from '@common/types/api/debtor';
+import {
+  ApiGetDebtorsParams,
+  ExpirationStatus,
+  PaymentStatus,
+} from '@common/types/api/debtor';
 import { useSearchParams } from '@common/hooks/useSearchParams';
 import { useEffectMounted } from '@common/hooks/useEffectMounted';
 import { useOnUnmount } from '@common/hooks/useOnUnmount';
@@ -31,16 +35,17 @@ export const DebtorDebtsList: React.FC<Props> = ({
 
   const { getParam, updateParam } = useSearchParams();
 
-  const paymentStatusList = getParam('status') as PaymentStatus;
+  const paymentStatusList = getParam('paymentStatuses') as PaymentStatus;
+  const expirationStatus = getParam('expirationStatus') as ExpirationStatus;
 
   useEffectMounted(() => {
     resetData();
     setPage(1);
-    getData({ page: 1, paymentStatusList });
-  }, [paymentStatusList]);
+    getData({ page: 1, paymentStatusList, expirationStatus });
+  }, [paymentStatusList, expirationStatus]);
 
   useEffect(() => {
-    getData({ page, paymentStatusList });
+    getData({ page, paymentStatusList, expirationStatus });
   }, [page]);
 
   useOnUnmount(() => {
@@ -49,7 +54,7 @@ export const DebtorDebtsList: React.FC<Props> = ({
 
   useEffect(() => {
     if (paymentStatusList) return;
-    updateParam('status', 'NEW,IN_PROGRESS');
+    updateParam('paymentStatuses', 'NEW,IN_PROGRESS');
   }, []);
 
   return (
