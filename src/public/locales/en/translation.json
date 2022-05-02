@@ -1,5 +1,6 @@
 {
   "debtors": {
+    "my_debtors": "My debtors",
     "no_debtors_yet": "No Debtors yet here..",
     "all_debts_sum": "All debts sum",
     "debts_count": "Debts count",

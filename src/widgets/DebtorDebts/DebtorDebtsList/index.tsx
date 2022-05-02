@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Box, Grid, Typography } from '@mui/material';
@@ -10,6 +10,8 @@ import { InfiniteScrollLayout } from '@components/InfiniteScrollLayout';
 import { DebtorDebtsListItemContainer } from '@containers/DebtorDebts/DebtorDebtsListItemContainer';
 import { ApiGetDebtorsParams, PaymentStatus } from '@common/types/api/debtor';
 import { useSearchParams } from '@common/hooks/useSearchParams';
+import { useEffectMounted } from '@common/hooks/useEffectMounted';
+import { useOnUnmount } from '@common/hooks/useOnUnmount';
 
 export interface Props
   extends AsyncState<PaginatedHttpSuccessResponse<number[]>, unknown> {
@@ -24,30 +26,42 @@ export const DebtorDebtsList: React.FC<Props> = ({
   value,
 }) => {
   const { data = [], pagesCount, currentPage } = value || {};
+  const [page, setPage] = useState(1);
   const { t } = useTranslation();
 
-  const { getParam } = useSearchParams();
+  const { getParam, updateParam } = useSearchParams();
 
   const paymentStatusList = getParam('status') as PaymentStatus;
 
-  const getListData = (params: ApiGetDebtorsParams) => {
-    getData({ ...params, paymentStatusList });
-  };
+  useEffectMounted(() => {
+    resetData();
+    setPage(1);
+    getData({ page: 1, paymentStatusList });
+  }, [paymentStatusList]);
 
   useEffect(() => {
-    // getData({ page: 1, paymentStatusList });
+    getData({ page, paymentStatusList });
+  }, [page]);
 
-    return () => resetData();
+  useOnUnmount(() => {
+    resetData();
+  });
+
+  useEffect(() => {
+    if (paymentStatusList) return;
+    updateParam('status', 'NEW,IN_PROGRESS');
   }, []);
-
-  // console.log(paymentStatusList);
 
   return (
     <InfiniteScrollLayout
+      onScroll={({ isLastPage, isOnBottom }) => {
+        if (!isOnBottom || isLastPage || isProcessing) return;
+
+        setPage((_page) => _page + 1);
+      }}
+      page={page}
       pagesCount={pagesCount || 1}
       bottomPositionOffset={248}
-      getData={getListData}
-      getDataDeps={[paymentStatusList]}
       isProcessing={!!(isProcessing && currentPage)}
       justifyContent="center"
       height="100%"

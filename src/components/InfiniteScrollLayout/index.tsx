@@ -1,58 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { Box, BoxProps, CircularProgress } from '@mui/material';
 
-import { ApiListParams } from '@common/types/api';
-
-export interface Props extends BoxProps {
+export interface Props extends Omit<BoxProps, 'onScroll'> {
+  page: number;
   isProcessing: boolean;
-  initialPage?: number;
   pagesCount: number;
   onPage?: number;
-  getData: (paginationData: ApiListParams) => void;
   bottomPositionOffset?: number;
   withProgressBar?: boolean;
-  getDataDeps?: any[];
+  onScroll: (params: { isOnBottom: boolean; isLastPage: boolean }) => void;
 }
 
 export const InfiniteScrollLayout: React.FC<Props> = ({
   children,
   isProcessing,
-  getData,
-  getDataDeps = [],
-  initialPage = 1,
+  page,
   onPage,
   pagesCount,
   bottomPositionOffset = 0,
   withProgressBar = true,
+  onScroll: _onScroll,
   ...boxProps
 }) => {
-  const [page, setPage] = useState(initialPage);
-
-  useEffect(() => {
-    getData({ page });
-  }, [page, ...(getDataDeps as string[])]);
-
   const onScroll: React.UIEventHandler<HTMLDivElement> = ({
     target: _target,
   }) => {
-    setPage((actualPage) => {
-      if (pagesCount === actualPage || isProcessing) return actualPage;
+    const target = _target as HTMLElement;
 
-      const target = _target as HTMLElement;
+    const { scrollTop, scrollHeight, offsetHeight } = target;
 
-      const { scrollTop, scrollHeight, offsetHeight } = target;
+    const bottomPosition = scrollHeight - offsetHeight - bottomPositionOffset;
 
-      const bottomPosition = scrollHeight - offsetHeight - bottomPositionOffset;
-
-      const isOnBottom = scrollTop >= bottomPosition;
-
-      if (isOnBottom) {
-        return actualPage + 1;
-      }
-
-      return actualPage;
-    });
+    const isOnBottom = scrollTop >= bottomPosition;
+    _onScroll({ isOnBottom, isLastPage: pagesCount === page });
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Box, Typography } from '@mui/material';
@@ -33,6 +33,7 @@ export const DebtorsList: React.FC<Props> = ({
   value,
 }) => {
   const { t } = useTranslation();
+  const [page, setPage] = useState(1);
 
   const { data, currentPage, pagesCount } = value || {};
 
@@ -44,14 +45,17 @@ export const DebtorsList: React.FC<Props> = ({
     });
 
     return () => resetData();
-  }, []);
+  }, [page]);
 
   return (
     <InfiniteScrollLayout
+      onScroll={({ isLastPage, isOnBottom }) => {
+        if (isLastPage || isOnBottom || isProcessing) return;
+
+        setPage((_page) => _page + 1);
+      }}
+      page={page}
       isProcessing={isProcessing && !!currentPage}
-      getData={(apiListParams) =>
-        getData({ ...apiListParams, userId: myTelegramUserId })
-      }
       pagesCount={pagesCount || 1}
       justifyContent="center"
       height="100%"
