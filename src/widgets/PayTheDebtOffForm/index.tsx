@@ -89,9 +89,8 @@ export const PayTheDebtOffForm: React.FC<Props> = ({
             loadingPosition="start"
             startIcon={<></>}
             type="submit"
-            size="large"
-            color="primary"
             variant="contained"
+            size="large"
             fullWidth
           >
             {t('common.submit')}

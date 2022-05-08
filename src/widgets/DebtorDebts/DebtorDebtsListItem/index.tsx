@@ -102,13 +102,11 @@ export const DebtorDebtsListItem: React.FC<Props> = ({
             to={`${ROOT_ROUTES.DEBTORS}/debtorId/${debtorId}/pay-the-debt-off/${id}`}
           >
             <Button
-              color="primary"
               variant="contained"
               sx={{
                 marginTop: 45,
               }}
               fullWidth
-              size="large"
             >
               {t('debts.pay_the_debt_off')}
             </Button>

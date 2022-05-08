@@ -96,12 +96,7 @@ export const DebtorsListItem: React.FC<Props> = ({ user, debtsInfo }) => {
               )}
               style={{ width: '100%' }}
             >
-              <Button
-                fullWidth
-                color="primary"
-                variant="contained"
-                size="large"
-              >
+              <Button fullWidth variant="contained">
                 {t('common.details')}
               </Button>
             </LocalizedLink>

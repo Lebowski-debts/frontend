@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 
-import { Box, Grid, Paper, TextField, useTheme } from '@mui/material';
+import { Box, Grid, Paper, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import { LoadingButton } from '@mui/lab';
@@ -28,7 +28,6 @@ export const DebtForm: React.FC<Props> = ({
   defaultFormData,
 }) => {
   const { t } = useTranslation();
-  const { palette } = useTheme();
 
   const {
     control,
@@ -156,7 +155,7 @@ export const DebtForm: React.FC<Props> = ({
             type="submit"
             size="large"
             fullWidth
-            sx={{ background: palette.primary.light, color: 'white' }}
+            variant="contained"
           >
             {t('common.submit')}
           </LoadingButton>
