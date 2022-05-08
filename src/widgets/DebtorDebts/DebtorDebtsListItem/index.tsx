@@ -102,16 +102,15 @@ export const DebtorDebtsListItem: React.FC<Props> = ({
             to={`${ROOT_ROUTES.DEBTORS}/debtorId/${debtorId}/pay-the-debt-off/${id}`}
           >
             <Button
+              color="primary"
+              variant="contained"
               sx={{
-                background: palette.primary.light,
                 marginTop: 45,
               }}
               fullWidth
               size="large"
             >
-              <Typography color="white" fontSize={16}>
-                {t('debts.pay_the_debt_off')}
-              </Typography>
+              {t('debts.pay_the_debt_off')}
             </Button>
           </LocalizedLink>
         )}

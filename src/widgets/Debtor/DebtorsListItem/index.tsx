@@ -97,12 +97,12 @@ export const DebtorsListItem: React.FC<Props> = ({ user, debtsInfo }) => {
               style={{ width: '100%' }}
             >
               <Button
-                sx={{ background: theme.palette.primary.light, width: '100%' }}
+                fullWidth
+                color="primary"
+                variant="contained"
                 size="large"
               >
-                <Typography color="white" fontSize={16}>
-                  {t('common.details')}
-                </Typography>
+                {t('common.details')}
               </Button>
             </LocalizedLink>
           </Grid>

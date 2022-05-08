@@ -28,15 +28,27 @@ const theme = createTheme({
     },
 
     primary: {
-      light: '#38608C',
-      main: '#1D3958',
+      light: '#38709A',
+      main: '#38608C',
       dark: '#0D1C2D',
+      contrastText: '#ffff',
     },
 
     secondary: {
       light: '#E3F2FD',
       main: '#90CAF9',
       dark: '#42A5F5',
+      contrastText: '#000',
+    },
+  },
+  components: {
+    MuiSelect: {
+      styleOverrides: {
+        // select: {
+        //   ':'
+        //   borderColor: 'white',
+        // },
+      },
     },
   },
 });

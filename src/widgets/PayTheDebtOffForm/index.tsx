@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { LoadingButton } from '@mui/lab';
-import { Box, Grid, Paper, TextField, useTheme } from '@mui/material';
+import { Box, Grid, Paper, TextField } from '@mui/material';
 
 import { ApiPayTheDebtOff } from '@common/types/api/debt';
 import { AbsoluteProgress } from '@components/AbsoluteProgress';
@@ -25,7 +25,6 @@ export const PayTheDebtOffForm: React.FC<Props> = ({
   children = null,
 }) => {
   const { t } = useTranslation();
-  const { palette } = useTheme();
 
   const {
     control,
@@ -91,8 +90,9 @@ export const PayTheDebtOffForm: React.FC<Props> = ({
             startIcon={<></>}
             type="submit"
             size="large"
+            color="primary"
+            variant="contained"
             fullWidth
-            sx={{ background: palette.primary.light, color: 'white' }}
           >
             {t('common.submit')}
           </LoadingButton>

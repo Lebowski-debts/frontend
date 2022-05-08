@@ -5,6 +5,8 @@ import {
   Box,
   Button,
   Chip,
+  FormControl,
+  InputLabel,
   MenuItem,
   Select,
   // TextField,
@@ -110,34 +112,37 @@ export const DebtorDebtsDrawerFilter = ({ onClose, onCloseDrawer }: Props) => {
       </Box> */}
 
       <Box marginBottom={20}>
-        <Typography fontSize={16} marginBottom={10}>
-          {t('debts_filter.expiration_status')}
-        </Typography>
-        <Select
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
-          label={t('debts_filter.expiration_status_placeholder')}
-          fullWidth
-          onChange={(e) => setExpirationStatus(e.target.value)}
-          value={expirationStatus}
-        >
-          {EXPIRATION_STATUSES.map((status) => (
-            <MenuItem key={status} value={status}>
-              {t(`expiration_status.${status.toLowerCase()}`)}
-            </MenuItem>
-          ))}
-        </Select>
+        <FormControl fullWidth>
+          <InputLabel id="debts-filter-expiration-status-select">
+            {t('debts_filter.expiration_status')}
+          </InputLabel>
+          <Select
+            labelId="debts-filter-expiration-status-select"
+            label={t('debts_filter.expiration_status')}
+            variant="outlined"
+            color="secondary"
+            fullWidth
+            onChange={(e) => setExpirationStatus(e.target.value)}
+            value={expirationStatus}
+          >
+            {EXPIRATION_STATUSES.map((status) => (
+              <MenuItem key={status} value={status}>
+                {t(`expiration_status.${status.toLowerCase()}`)}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </Box>
 
       <Button
         size="large"
         fullWidth
         sx={{
-          background: (theme) => theme.palette.primary.light,
-          color: 'white',
           marginBottom: 12,
           marginTop: 50,
         }}
+        color="primary"
+        variant="contained"
         onClick={onSubmit}
       >
         {t('common.submit')}
@@ -146,11 +151,8 @@ export const DebtorDebtsDrawerFilter = ({ onClose, onCloseDrawer }: Props) => {
       <Button
         variant="outlined"
         size="large"
+        color="secondary"
         fullWidth
-        sx={{
-          color: 'white',
-          borderColor: (theme) => theme.palette.primary.light,
-        }}
         onClick={onClose}
       >
         {t('common.back')}
