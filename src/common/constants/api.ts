@@ -20,3 +20,5 @@ export const DEFAULT_DEBTORS_LIST_PARAMS = {
 };
 
 export const EXPIRATION_STATUSES = ['EXPIRED', 'NOT_EXPIRED'];
+
+export const SORT_BY_VALUES = ['createdAt', 'expireDate'];

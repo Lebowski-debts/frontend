@@ -26,6 +26,9 @@
     "expiration_status": "Статус истечения",
     "expiration_status_placeholder": "Выберите статус истечения долга"
   },
+  "debts_sort": {
+    "sort_by": "Сортировать по"
+  },
   "debt_status": {
     "new": "Новый",
     "in_progress": "В процессе",
@@ -56,5 +59,9 @@
   "expiration_status": {
     "expired": "Истек",
     "not_expired": "Не истек"
+  },
+  "sort_by": {
+    "createdAt": "Дата создания",
+    "expireDate": "Дата истечения"
   }
 }

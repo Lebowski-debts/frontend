@@ -5,6 +5,7 @@ import { Drawer, DrawerProps } from '@mui/material';
 import { DebtorDebtsDrawerMain } from './Main';
 import { TabName } from './types';
 import { DebtorDebtsDrawerFilter } from './Filter';
+import { DebtorDebtsDrawerSort } from './Sort';
 
 export const DebtorDebtsDrawer = (props: DrawerProps) => {
   const [tab, setTab] = useState<TabName | ''>('');
@@ -39,6 +40,13 @@ export const DebtorDebtsDrawer = (props: DrawerProps) => {
 
       {tab === 'FILTERS' && (
         <DebtorDebtsDrawerFilter
+          onCloseDrawer={onClose}
+          onClose={() => setTab('')}
+        />
+      )}
+
+      {tab === 'SORTING' && (
+        <DebtorDebtsDrawerSort
           onCloseDrawer={onClose}
           onClose={() => setTab('')}
         />

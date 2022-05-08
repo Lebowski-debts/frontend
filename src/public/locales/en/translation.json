@@ -26,6 +26,9 @@
     "expiration_status": "Expiration status",
     "expiration_status_placeholder": "Select expiration status"
   },
+  "debts_sort": {
+    "sort_by": "Sort by"
+  },
   "debt_status": {
     "new": "New",
     "in_progress": "In progress",
@@ -56,5 +59,9 @@
   "expiration_status": {
     "expired": "Expired",
     "not_expired": "Not expired"
+  },
+  "sort_by": {
+    "createdAt": "Created at",
+    "expireDate": "Expires at"
   }
 }

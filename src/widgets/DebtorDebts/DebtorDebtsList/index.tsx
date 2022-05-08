@@ -5,13 +5,14 @@ import { Box, Grid, Typography } from '@mui/material';
 
 import { AbsoluteProgress } from '@components/AbsoluteProgress';
 import { AsyncState } from '@common/store/helpers';
-import { PaginatedHttpSuccessResponse } from '@common/types/api';
+import { PaginatedHttpSuccessResponse, SortType } from '@common/types/api';
 import { InfiniteScrollLayout } from '@components/InfiniteScrollLayout';
 import { DebtorDebtsListItemContainer } from '@containers/DebtorDebts/DebtorDebtsListItemContainer';
 import {
   ApiGetDebtorsParams,
   ExpirationStatus,
   PaymentStatus,
+  SortBy,
 } from '@common/types/api/debtor';
 import { useSearchParams } from '@common/hooks/useSearchParams';
 import { useEffectMounted } from '@common/hooks/useEffectMounted';
@@ -37,15 +38,29 @@ export const DebtorDebtsList: React.FC<Props> = ({
 
   const paymentStatusList = getParam('paymentStatuses') as PaymentStatus;
   const expirationStatus = getParam('expirationStatus') as ExpirationStatus;
+  const sortType = getParam('sortType') as SortType;
+  const orderField = getParam('sortBy') as SortBy;
 
   useEffectMounted(() => {
     resetData();
     setPage(1);
-    getData({ page: 1, paymentStatusList, expirationStatus });
-  }, [paymentStatusList, expirationStatus]);
+    getData({
+      page: 1,
+      paymentStatusList,
+      expirationStatus,
+      sortType,
+      orderField,
+    });
+  }, [paymentStatusList, expirationStatus, sortType, orderField]);
 
   useEffect(() => {
-    getData({ page, paymentStatusList, expirationStatus });
+    getData({
+      page,
+      paymentStatusList,
+      expirationStatus,
+      sortType,
+      orderField,
+    });
   }, [page]);
 
   useOnUnmount(() => {
@@ -53,8 +68,14 @@ export const DebtorDebtsList: React.FC<Props> = ({
   });
 
   useEffect(() => {
-    if (paymentStatusList) return;
-    updateParam('paymentStatuses', 'NEW,IN_PROGRESS');
+    if (!paymentStatusList) {
+      updateParam('paymentStatuses', 'NEW,IN_PROGRESS');
+    }
+
+    if (sortType || orderField) return;
+
+    updateParam('sortBy', 'createdAt');
+    updateParam('sortType', 'desc');
   }, []);
 
   return (

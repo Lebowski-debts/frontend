@@ -22,3 +22,5 @@ export interface NormalizedList<E, K = string | number> {
   entities: NormalizedListValues<E>;
   keys: K[];
 }
+
+export type SortType = 'asc' | 'desc';

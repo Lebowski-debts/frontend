@@ -113,7 +113,10 @@ export const DebtorDebtsDrawerFilter = ({ onClose, onCloseDrawer }: Props) => {
 
       <Box marginBottom={20}>
         <FormControl fullWidth>
-          <InputLabel id="debts-filter-expiration-status-select">
+          <InputLabel
+            color="secondary"
+            id="debts-filter-expiration-status-select"
+          >
             {t('debts_filter.expiration_status')}
           </InputLabel>
           <Select
