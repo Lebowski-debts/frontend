@@ -41,12 +41,12 @@ export const DebtorDebtsHeader = () => {
                 <Avatar
                   userName={debtor.nickname || debtor.telegramUserLogin}
                 />
-                <Typography fontSize={20} marginLeft={10}>
+                <Typography variant="h6" color="secondary" marginLeft={10}>
                   {debtor.nickname || debtor.telegramUserLogin}
                 </Typography>
               </>
             ) : (
-              <Typography fontSize={20} marginLeft={10}>
+              <Typography variant="h6" color="secondary" marginLeft={10}>
                 {t('common.loading')}
               </Typography>
             )}

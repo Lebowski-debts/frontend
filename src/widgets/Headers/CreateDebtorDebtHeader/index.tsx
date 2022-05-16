@@ -27,7 +27,7 @@ export const CreateDebtorDebtHeader = () => {
         </Box>
 
         <Box display="flex">
-          <Typography fontSize={20}>
+          <Typography variant="h6" color="secondary">
             {t('debt_form.create_new_debt')}
           </Typography>
         </Box>

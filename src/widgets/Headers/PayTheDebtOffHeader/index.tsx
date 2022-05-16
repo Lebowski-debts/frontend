@@ -27,7 +27,7 @@ export const PayTheDebtOffHeader = () => {
         </Box>
 
         <Box display="flex">
-          <Typography fontSize={20}>
+          <Typography variant="h6" color="secondary">
             {t('pay_the_debt_off.pay_the_debt_off_form_title')}
           </Typography>
         </Box>

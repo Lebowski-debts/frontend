@@ -3,7 +3,13 @@ export const ROOT_ROUTES = {
 
   DEBTORS: '/debtors',
 
+  LENDERS: '/lenders',
+
+  SETTINGS: '/settings',
+
   DEBTS: '/debts',
+
+  LOGOUT: '/logout',
 
   get DEBTOR_DEBTS() {
     return `${this.DEBTORS}/debtorId/:debtorId${this.DEBTS}`;

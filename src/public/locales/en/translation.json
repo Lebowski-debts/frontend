@@ -63,5 +63,11 @@
   "sort_by": {
     "createdAt": "Created at",
     "expireDate": "Expires at"
+  },
+  "navigation": {
+    "debtors": "My debtors",
+    "lenders": "My lenders",
+    "settings": "Settings",
+    "logout": "Log out"
   }
 }

@@ -63,5 +63,11 @@
   "sort_by": {
     "createdAt": "Дата создания",
     "expireDate": "Дата истечения"
+  },
+  "navigation": {
+    "debtors": "Мои должники",
+    "lenders": "Кому я должен",
+    "settings": "Настройки",
+    "logout": "Выйти"
   }
 }
