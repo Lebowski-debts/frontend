@@ -1,6 +1,5 @@
 {
   "debtors": {
-    "my_debtors": "Мои должники",
     "no_debtors_yet": "Должников не найдено..",
     "all_debts_sum": "Сумма всех долгов",
     "debts_count": "Количество долгов",
