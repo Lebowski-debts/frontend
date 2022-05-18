@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { Box, BoxProps, Theme } from '@mui/material';
 
@@ -12,7 +13,10 @@ export const AppLayout: React.FC<Props> = ({
   header = null,
   ...contentBoxProps
 }) => {
+  const [, setPathname] = useState('');
+  const location = useLocation();
   const headerRef = useRef<HTMLDivElement>();
+
   const defaultStyles = headerRef.current?.innerHTML
     ? {
         marginTop: (theme: Theme) => theme.mixins.toolbar.minHeight,
@@ -20,6 +24,10 @@ export const AppLayout: React.FC<Props> = ({
           `calc(100% - ${theme.mixins.toolbar.minHeight || 0}px)`,
       }
     : {};
+
+  useEffect(() => {
+    setPathname(location.pathname);
+  }, [location.pathname]);
 
   return (
     <>
