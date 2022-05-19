@@ -7,7 +7,7 @@ import { AbsoluteProgress } from '@components/AbsoluteProgress';
 import { AsyncState } from '@common/store/helpers';
 import { PaginatedHttpSuccessResponse, SortType } from '@common/types/api';
 import { InfiniteScrollLayout } from '@components/InfiniteScrollLayout';
-import { DebtorDebtsListItemContainer } from '@containers/DebtorDebts/DebtorDebtsListItemContainer';
+import { DebtsListItemContainer } from '@containers/Debts/DebtsListItemContainer';
 import {
   ApiGetDebtorsParams,
   ExpirationStatus,
@@ -24,7 +24,7 @@ export interface Props
   resetData: () => void;
 }
 
-export const DebtorDebtsList: React.FC<Props> = ({
+export const DebtsList: React.FC<Props> = ({
   getData,
   resetData,
   isProcessing = false,
@@ -105,11 +105,7 @@ export const DebtorDebtsList: React.FC<Props> = ({
           xs={12}
           marginBottom={index === data.length - 1 ? 0 : 20}
         >
-          <DebtorDebtsListItemContainer
-            key={id}
-            index={index + 1}
-            debtId={id}
-          />
+          <DebtsListItemContainer key={id} index={index + 1} debtId={id} />
         </Grid>
       ))}
 

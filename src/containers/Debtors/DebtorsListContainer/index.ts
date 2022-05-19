@@ -5,7 +5,12 @@ import { selectGetDebtors } from '@ducks/debtors/debtors.selectors';
 import { getDebtorsSlice } from '@ducks/debtors/debtors.slice';
 import { RootState } from '@store';
 
-const mapStateToProps = (state: RootState) => selectGetDebtors(state) || {};
+import { DebtorsListItemContainer } from '../DebtorsListItemContainer';
+
+const mapStateToProps = (state: RootState) => ({
+  ...selectGetDebtors(state),
+  DebtorsListItemContainer,
+});
 
 const mapDispatchToProps = {
   getData: getDebtorsSlice.actions.request,

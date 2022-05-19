@@ -21,6 +21,14 @@ export const debtorsApi = {
       }
     ),
 
+  getLenders: (userId: number, params: ApiGetDebtorsParams) =>
+    apiClient.get<PaginatedHttpSuccessResponse<ApiGetDebtor[]>>(
+      `${API_ROUTES.DEBT}/lenders/${userId}`,
+      {
+        params: { ...DEFAULT_DEBTORS_LIST_PARAMS, ...params },
+      }
+    ),
+
   getDebtorDebts: (
     fromId: number,
     toId: number,

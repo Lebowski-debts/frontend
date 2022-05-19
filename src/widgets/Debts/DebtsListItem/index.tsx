@@ -25,7 +25,7 @@ export interface Props extends ApiGetDebt {
   showPayButton?: boolean;
 }
 
-export const DebtorDebtsListItem: React.FC<Props> = ({
+export const DebtsListItem: React.FC<Props> = ({
   actualSum,
   createdAt,
   expireDate,
@@ -34,9 +34,10 @@ export const DebtorDebtsListItem: React.FC<Props> = ({
   paymentStatus,
   index = null,
   id,
-  showPayButton = true,
+  showPayButton: _showPayButton,
 }) => {
   if (!id) return null;
+
   const { t } = useTranslation();
   const { palette } = useTheme();
 
@@ -51,6 +52,11 @@ export const DebtorDebtsListItem: React.FC<Props> = ({
   const colorByDebtStatus = isExpired
     ? palette.error.main
     : colorsByDebtStatus[paymentStatus];
+
+  const showPayButton =
+    _showPayButton === undefined
+      ? debtorId !== process.env.TELEGRAM_USER_ID
+      : _showPayButton;
 
   return (
     <Card>

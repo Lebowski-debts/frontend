@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { Add, ArrowBackIos } from '@mui/icons-material';
 import { Box, Typography } from '@mui/material';
@@ -11,14 +12,36 @@ import { AppHeader } from '@components/AppHeader';
 import { Avatar } from '@components/Avatar';
 import { LocalizedLink } from '@components/LocalizedLink';
 import { selectUser } from '@ducks/users/users.selector';
-import { DebtorDebtsDrawer } from '@widgets/DebtorDebts/DebtorDebtsDrawer';
+import { DebtsDrawer } from '@widgets/Debts/DebtsDrawer';
+import { getUserByIdSlice } from '@ducks/users/users.slice';
 
-export const DebtorDebtsHeader = () => {
+export const LenderDebtorDebtsHeader = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const { debtorId } = useParams<{ debtorId: string }>();
-  const debtor = useAppSelector((state) => selectUser(state, +debtorId));
+  const { lenderId, debtorId } =
+    useParams<{ lenderId: string; debtorId: string }>();
+
+  const currentUserId = process.env.TELEGRAM_USER_ID;
+
+  let userId = +lenderId;
+
+  if (lenderId === currentUserId) {
+    userId = +debtorId;
+  }
+
+  const headerUser = useAppSelector((state) => selectUser(state, userId));
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!headerUser) {
+      dispatch(getUserByIdSlice.actions.request({ userId }));
+    }
+  }, [headerUser]);
 
   const { t } = useTranslation();
+
+  const prevRoute =
+    lenderId === currentUserId ? ROOT_ROUTES.DEBTORS : ROOT_ROUTES.LENDERS;
 
   return (
     <>
@@ -30,19 +53,19 @@ export const DebtorDebtsHeader = () => {
           width="100%"
         >
           <Box display="flex">
-            <LocalizedLink style={{ height: 24 }} to={ROOT_ROUTES.DEBTORS}>
+            <LocalizedLink style={{ height: 24 }} to={prevRoute}>
               <ArrowBackIos />
             </LocalizedLink>
           </Box>
 
           <Box display="flex" justifyContent="center" alignItems="center">
-            {debtor ? (
+            {headerUser ? (
               <>
                 <Avatar
-                  userName={debtor.nickname || debtor.telegramUserLogin}
+                  userName={headerUser.nickname || headerUser.telegramUserLogin}
                 />
                 <Typography variant="h6" color="secondary" marginLeft={10}>
-                  {debtor.nickname || debtor.telegramUserLogin}
+                  {headerUser.nickname || headerUser.telegramUserLogin}
                 </Typography>
               </>
             ) : (
@@ -53,20 +76,19 @@ export const DebtorDebtsHeader = () => {
           </Box>
 
           <Box display="flex">
-            <LocalizedLink
-              style={{ height: 24 }}
-              to={`${ROOT_ROUTES.DEBTORS}/debtorId/${debtorId}/new-debt`}
-            >
-              <Add />
-            </LocalizedLink>
+            {userId === +debtorId && (
+              <LocalizedLink
+                style={{ height: 24 }}
+                to={`${ROOT_ROUTES.DEBTORS}/debtorId/${userId}/new-debt`}
+              >
+                <Add />
+              </LocalizedLink>
+            )}
           </Box>
         </Box>
       </AppHeader>
 
-      <DebtorDebtsDrawer
-        open={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
-      />
+      <DebtsDrawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
     </>
   );
 };

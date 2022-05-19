@@ -3,7 +3,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { ROOT_ROUTES } from '@common/constants/routes';
-import { DebtorDebtsHeader } from '@widgets/Headers/DebtorDebtsHeader';
+import { LenderDebtorDebtsHeader } from '@widgets/Headers/LenderDebtorDebtsHeader';
 import { CreateDebtorDebtHeader } from '@widgets/Headers/CreateDebtorDebtHeader';
 import { PayTheDebtOffHeader } from '@widgets/Headers/PayTheDebtOffHeader';
 import { MainSideBar } from '@widgets/SideBars/Main';
@@ -44,8 +44,8 @@ export const HeaderRouter: React.FC = () => {
           />
         </Route>
 
-        <Route path={`${locale}${ROOT_ROUTES.DEBTOR_DEBTS}`} exact>
-          <DebtorDebtsHeader />
+        <Route path={`${locale}${ROOT_ROUTES.LENDER_DEBTOR_DEBTS}`} exact>
+          <LenderDebtorDebtsHeader />
         </Route>
 
         <Route path={`${locale}${ROOT_ROUTES.CREATE_DEBTOR_DEBT}`} exact>

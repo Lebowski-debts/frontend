@@ -4,7 +4,12 @@
     "all_debts_sum": "Сумма всех долгов",
     "debts_count": "Количество долгов",
     "last_debt_from": "Последний долг",
-    "expired_debts_encountered": "У вас есть просроченные долги!"
+    "expired_debts_encountered": "У вас есть просроченные долги!",
+    "debtor_has_no_debts": "Этот пользователь ничего не должен"
+  },
+  "lenders": {
+    "lender_has_no_debts": "Вы ничего не должны этому пользователю",
+    "no_lenders_yet": "Вы пока никому не должны.."
   },
   "debts": {
     "debt_created_at": "Долг от",

@@ -11,12 +11,12 @@ export const ROOT_ROUTES = {
 
   LOGOUT: '/logout',
 
-  get DEBTOR_DEBTS() {
-    return `${this.DEBTORS}/debtorId/:debtorId${this.DEBTS}`;
+  get LENDER_DEBTOR_DEBTS() {
+    return `${this.DEBTORS}/lenderId/:lenderId/debtorId/:debtorId${this.DEBTS}`;
   },
 
-  getDebtorDebtsRoute: (debtorId: number) =>
-    `${ROOT_ROUTES.DEBTORS}/debtorId/${debtorId}${ROOT_ROUTES.DEBTS}`,
+  getLenderDebtorDebtsRoute: (lenderId: number, debtorId: number) =>
+    `${ROOT_ROUTES.DEBTORS}/lenderId/${lenderId}/debtorId/${debtorId}${ROOT_ROUTES.DEBTS}`,
 
   get CREATE_DEBTOR_DEBT() {
     return `${this.DEBTORS}/debtorId/:debtorId/new-debt`;

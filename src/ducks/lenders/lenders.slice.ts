@@ -7,16 +7,15 @@ import {
   PaginatedHttpSuccessResponse,
 } from '@common/types/api';
 import { ApiGetDebtorDebtsCommonInfo } from '@common/types/api/debtor';
+import { GetDebtorsPayload } from '@ducks/debtors/debtors.types';
 
-import { GetDebtorsPayload } from './debtors.types';
-
-export const getDebtorsSlice = createAsyncSlice<
+export const getLendersSlice = createAsyncSlice<
   GetDebtorsPayload,
   PaginatedHttpSuccessResponse<
     NormalizedList<ApiGetDebtorDebtsCommonInfo, number>
   >
 >({
-  name: 'getDebtors',
+  name: 'getLenders',
   reducers: {
     success: (
       state,
@@ -51,6 +50,6 @@ export const getDebtorsSlice = createAsyncSlice<
   },
 });
 
-export const debtorsReducer = combineReducers({
-  getDebtors: getDebtorsSlice.reducer,
+export const lendersReducer = combineReducers({
+  getLenders: getLendersSlice.reducer,
 });

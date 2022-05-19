@@ -19,10 +19,15 @@ import { formatDate } from '@common/helpers/dates';
 import { prettifyNumber } from '@common/helpers/number';
 
 export interface Props extends ApiGetDebtor {
-  debtorId: number;
+  userId: number;
+  getDebtsRoute: (userId: number) => string;
 }
 
-export const DebtorsListItem: React.FC<Props> = ({ user, debtsInfo }) => {
+export const DebtorsListItem: React.FC<Props> = ({
+  user,
+  debtsInfo,
+  getDebtsRoute,
+}) => {
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -91,9 +96,7 @@ export const DebtorsListItem: React.FC<Props> = ({ user, debtsInfo }) => {
 
           <Grid display="flex" marginTop={24} width="100%">
             <LocalizedLink
-              to={ROOT_ROUTES.getDebtorDebtsRoute(
-                user.telegramUserId || user.id || 0
-              )}
+              to={getDebtsRoute(user.telegramUserId || user.id || 0)}
               style={{ width: '100%' }}
             >
               <Button fullWidth variant="contained">

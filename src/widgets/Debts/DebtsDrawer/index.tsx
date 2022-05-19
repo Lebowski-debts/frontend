@@ -7,7 +7,7 @@ import { TabName } from './types';
 import { DebtorDebtsDrawerFilter } from './Filter';
 import { DebtorDebtsDrawerSort } from './Sort';
 
-export const DebtorDebtsDrawer = (props: DrawerProps) => {
+export const DebtsDrawer = (props: DrawerProps) => {
   const [tab, setTab] = useState<TabName | ''>('');
 
   const onClose = () => {

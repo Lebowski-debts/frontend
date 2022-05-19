@@ -2,10 +2,11 @@ import React from 'react';
 import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
 
 import { ROOT_ROUTES } from '@common/constants/routes';
-import { DebtorsView } from '@views/Debtors';
-import { DebtorDebtsView } from '@views/DebtorDebts';
+import { LenderDebtorDebtsView } from '@views/LenderDebtorDebtsView';
 import { CreateDebtorDebtView } from '@views/CreateDebtorDebt';
 import { PayTheDebtOffView } from '@views/PayTheDebtOff';
+import { DebtorsListContainer } from '@containers/Debtors/DebtorsListContainer';
+import { LendersListContainer } from '@containers/Lenders/LendersListContainer';
 
 export const ContentRouter: React.FC = () => {
   const { url } = useRouteMatch();
@@ -17,11 +18,15 @@ export const ContentRouter: React.FC = () => {
       </Route>
 
       <Route path={`${url}${ROOT_ROUTES.DEBTORS}`} exact>
-        <DebtorsView />
+        <DebtorsListContainer />
       </Route>
 
-      <Route path={`${url}${ROOT_ROUTES.DEBTOR_DEBTS}`} exact>
-        <DebtorDebtsView />
+      <Route path={`${url}${ROOT_ROUTES.LENDERS}`} exact>
+        <LendersListContainer />
+      </Route>
+
+      <Route path={`${url}${ROOT_ROUTES.LENDER_DEBTOR_DEBTS}`} exact>
+        <LenderDebtorDebtsView />
       </Route>
 
       <Route path={`${url}${ROOT_ROUTES.CREATE_DEBTOR_DEBT}`} exact>

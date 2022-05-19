@@ -1,4 +1,4 @@
-import { isProcessing, _AsyncState } from '@common/store/helpers';
+import { isProcessing } from '@common/store/helpers';
 import { RootState } from '@store';
 
 export const selectGetDebtors = (state: RootState) => state.debtors.getDebtors;
@@ -14,24 +14,3 @@ export const selectDebtorsListIds = (state: RootState) =>
 
 export const selectGetDebtorsIsProcessing = (state: RootState) =>
   isProcessing(selectGetDebtors(state));
-
-export const selectGetDebtorDebts = (
-  state: RootState,
-  lenderDebtorKey: string
-) => state.debtors.getDebtorDebts[lenderDebtorKey];
-
-export const selectLenderDebtorDebtsData = (
-  state: RootState,
-  lenderDebtorKey: string
-) => selectGetDebtorDebts(state, lenderDebtorKey).value;
-
-export const selectLenderDebtorDebtsIsProcessing = (
-  state: RootState,
-  lenderDebtorKey: string
-) =>
-  isProcessing(
-    selectGetDebtorDebts(state, lenderDebtorKey) as _AsyncState<
-      unknown,
-      unknown
-    >
-  );

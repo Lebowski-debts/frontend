@@ -14,17 +14,17 @@ import {
 } from '@common/types/api/debtor';
 import { usersSlice } from '@ducks/users/users.slice';
 import { ApiGetUser } from '@common/types/api/user';
+import { GetDebtorsPayload } from '@ducks/debtors/debtors.types';
+import { debtorsSchema } from '@ducks/debtors/debtors.schemas';
 
-import { debtorsSchema } from './debtors.schemas';
-import { getDebtorsSlice } from './debtors.slice';
-import { GetDebtorsPayload } from './debtors.types';
+import { getLendersSlice } from './lenders.slice';
 
-function* getDebtorsSaga({ payload }: PayloadAction<GetDebtorsPayload>) {
+function* getLendersSaga({ payload }: PayloadAction<GetDebtorsPayload>) {
   try {
     const { userId, ...params } = payload;
     const {
       data: { data, ...paginationParams },
-    } = (yield call(debtorsApi.getDebtors, userId, params)) as AxiosResponse<
+    } = (yield call(debtorsApi.getLenders, userId, params)) as AxiosResponse<
       PaginatedHttpSuccessResponse<ApiGetDebtor[]>
     >;
 
@@ -40,7 +40,7 @@ function* getDebtorsSaga({ payload }: PayloadAction<GetDebtorsPayload>) {
     yield put(usersSlice.actions.fill(normalizedDebtorsList.entities.user));
 
     yield put(
-      getDebtorsSlice.actions.success({
+      getLendersSlice.actions.success({
         ...paginationParams,
         data: {
           entities: normalizedDebtorsList.entities.debtsInfo,
@@ -49,10 +49,10 @@ function* getDebtorsSaga({ payload }: PayloadAction<GetDebtorsPayload>) {
       })
     );
   } catch (error) {
-    yield put(getDebtorsSlice.actions.error(error));
+    yield put(getLendersSlice.actions.error(error));
   }
 }
 
-export function* debtorsSagas() {
-  yield takeEvery(getDebtorsSlice.actions.request, getDebtorsSaga);
+export function* lendersSagas() {
+  yield takeEvery(getLendersSlice.actions.request, getLendersSaga);
 }

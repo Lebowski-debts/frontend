@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
 import { usersApi } from '@api/users';
@@ -26,5 +26,5 @@ function* getUserByIdSaga({
 }
 
 export function* usersSagas() {
-  yield takeLatest(getUserByIdSlice.actions.request, getUserByIdSaga);
+  yield takeEvery(getUserByIdSlice.actions.request, getUserByIdSaga);
 }

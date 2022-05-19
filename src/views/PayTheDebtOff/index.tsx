@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { FormData, PayTheDebtOffForm } from '@widgets/PayTheDebtOffForm';
-import { DebtorDebtsListItemContainer } from '@containers/DebtorDebts/DebtorDebtsListItemContainer';
+import { DebtsListItemContainer } from '@containers/Debts/DebtsListItemContainer';
 import { payTheDebtOffSlice } from '@ducks/debts/debts.slice';
 import { useOnSuccess } from '@common/hooks/useOnSuccess';
 import { useAppSelector } from '@common/hooks/useAppSelector';
@@ -39,7 +39,7 @@ export const PayTheDebtOffView = () => {
       isProcessing={false}
       isUploading={isUploading}
     >
-      <DebtorDebtsListItemContainer showPayButton={false} debtId={+debtId} />
+      <DebtsListItemContainer showPayButton={false} debtId={+debtId} />
     </PayTheDebtOffForm>
   );
 };

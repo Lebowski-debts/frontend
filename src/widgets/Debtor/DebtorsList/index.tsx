@@ -5,7 +5,6 @@ import { Box, Typography } from '@mui/material';
 
 import { AbsoluteProgress } from '@components/AbsoluteProgress';
 import { GetDebtorsPayload } from '@ducks/debtors/debtors.types';
-import { DebtorsListItemContainer } from '@containers/Debtors/DebtorsListItemContainer';
 import { InfiniteScrollLayout } from '@components/InfiniteScrollLayout';
 import {
   NormalizedList,
@@ -24,13 +23,17 @@ export interface Props
   > {
   getData: (payload: GetDebtorsPayload) => void;
   resetData: () => void;
+  DebtorsListItemContainer: React.FC<{ userId: number }>;
+  noDebtorsYetLocale?: string;
 }
 
 export const DebtorsList: React.FC<Props> = ({
+  DebtorsListItemContainer,
   getData,
   resetData,
   isProcessing = false,
   value,
+  noDebtorsYetLocale = 'debtors.no_debtors_yet',
 }) => {
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
@@ -68,7 +71,7 @@ export const DebtorsList: React.FC<Props> = ({
 
       {data?.keys.map((id, index) => (
         <Box key={id} marginBottom={index === data?.keys.length - 1 ? 0 : 20}>
-          <DebtorsListItemContainer debtorId={id} />
+          <DebtorsListItemContainer userId={id} />
         </Box>
       ))}
 
@@ -80,7 +83,7 @@ export const DebtorsList: React.FC<Props> = ({
           height="100%"
           width="100%"
         >
-          <Typography fontSize={24}>{t('debtors.no_debtors_yet')}</Typography>
+          <Typography fontSize={24}>{t(noDebtorsYetLocale)}</Typography>
         </Box>
       )}
     </InfiniteScrollLayout>

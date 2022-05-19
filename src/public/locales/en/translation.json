@@ -7,6 +7,10 @@
     "expired_debts_encountered": "You have expired debts!",
     "debtor_has_no_debts": "This debtor has no debts"
   },
+  "lenders": {
+    "lender_has_no_debts": "This lender has no debts",
+    "no_lenders_yet": "No Lenders yet here.."
+  },
   "debts": {
     "debt_created_at": "Debt created at",
     "debt_sum": "Debt sum",
